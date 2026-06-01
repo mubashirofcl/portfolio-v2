@@ -57,9 +57,9 @@ export default function Overlay({ heroRef }: OverlayProps) {
         className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none px-6 text-center select-none"
       >
         <h1
-          className="text-white/10 tracking-tighter uppercase whitespace-nowrap leading-none select-none"
+          className="text-white/20 sm:text-white/10 tracking-tighter uppercase whitespace-nowrap leading-none select-none"
           style={{
-            fontSize: "clamp(5rem, 14vw, 14rem)",
+            fontSize: "clamp(3rem, 17vw, 14rem)",
             fontWeight: 900,
           }}
         >
@@ -76,20 +76,20 @@ export default function Overlay({ heroRef }: OverlayProps) {
         }}
         className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none px-6 text-center select-none"
       >
-        <span className="text-xs md:text-sm tracking-[0.25em] text-accent uppercase font-bold mb-4">
+        <span className="text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.25em] text-accent uppercase font-bold mb-4">
           I Build Scalable Full-Stack Apps
         </span>
         <h2
           className="text-white tracking-tighter leading-none font-extrabold mb-6"
           style={{
-            fontSize: "clamp(3.5rem, 9vw, 9rem)",
+            fontSize: "clamp(2rem, 8vw, 9rem)",
             letterSpacing: "-0.04em",
           }}
         >
           MUBASHIR
           PALAPADIYAN
         </h2>
-        <span className="text-xs md:text-sm tracking-[0.1em] text-white/50 uppercase font-medium">
+        <span className="text-[10px] sm:text-xs md:text-sm tracking-[0.05em] sm:tracking-[0.1em] text-white/50 uppercase font-medium max-w-xs sm:max-w-none">
           MERN Stack Developer &middot; Cloud Integrations &middot; Kerala, India
         </span>
       </motion.div>
@@ -104,9 +104,9 @@ export default function Overlay({ heroRef }: OverlayProps) {
         className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none px-6 text-center select-none"
       >
         <h2
-          className="text-white leading-[1.05] tracking-tight font-bold whitespace-pre-line"
+          className="text-white leading-[1.1] sm:leading-[1.05] tracking-tight font-bold whitespace-pre-line"
           style={{
-            fontSize: "clamp(2.5rem, 7vw, 7rem)",
+            fontSize: "clamp(1.4rem, 6vw, 7rem)",
             letterSpacing: "-0.03em",
           }}
         >
