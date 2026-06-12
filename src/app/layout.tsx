@@ -15,66 +15,107 @@ const bebasNeue = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "Mubashir PP — Full Stack MERN Developer | Next.js Portfolio",
-  description: "Production-focused MERN Stack Developer specializing in full-stack web applications, Next.js, MongoDB, REST APIs, JWT authentication, AWS deployment, and freelance web development. Based in Kerala, India.",
+  metadataBase: new URL('https://mubashiir.in'),
+  title: {
+    default: 'Mubashir Palapadiyan — MERN Stack Developer | Kerala',
+    template: '%s | Mubashir Palapadiyan',
+  },
+  description:
+    'Portfolio of Mubashir Palapadiyan (Mubashir PP), a MERN Stack Developer from Wayanad, Kerala. Builds scalable full-stack apps with React, Next.js, Node.js, MongoDB, AWS, and Docker.',
   keywords: [
-    "Mubashir PP",
-    "Mubashir MERN Developer",
-    "Full Stack Developer Kerala",
-    "Next.js Developer India",
-    "MERN Stack Developer Portfolio",
-    "Freelance Web Developer India",
-    "MongoDB Express React Node Developer",
-    "React Developer Kerala",
-    "Node.js Developer India",
-    "AWS Developer Kerala",
-    "Full Stack Developer Wayanad"
+    'Mubashir Palapadiyan',
+    'Mubashir PP',
+    'Mubashir MERN Developer',
+    'MERN Stack Developer Kerala',
+    'Full Stack Developer Wayanad',
+    'Next.js Developer India',
+    'React Developer Kerala',
+    'AWS Developer Kerala',
+    'mubashiir.in',
+    'Orvyn Labs',
   ],
-  authors: [{ name: "Mubashir PP", url: "https://mubashiir.in" }],
-  creator: "Mubashir PP",
-  icons: {
-    icon: "/icon.png",
+  authors: [{ name: 'Mubashir Palapadiyan', url: 'https://mubashiir.in' }],
+  creator: 'Mubashir Palapadiyan',
+  alternates: {
+    canonical: 'https://mubashiir.in',
   },
   openGraph: {
-    type: "website",
-    url: "https://mubashiir.in",
-    title: "Mubashir PP — Full Stack MERN Developer",
-    description: "Production-focused MERN Stack Developer — full-stack apps, AWS deployment, freelance development.",
-    siteName: "Mubashir PP Portfolio",
-    images: [{ url: "https://mubashiir.in/og-image.png", width: 1200, height: 630 }]
+    type: 'website',
+    url: 'https://mubashiir.in',
+    siteName: 'Mubashir Palapadiyan — Portfolio',
+    title: 'Mubashir Palapadiyan — MERN Stack Developer',
+    description:
+      'Full-stack engineer from Kerala specialising in React, Node.js, MongoDB, and cloud deployments. Founder of Orvyn Labs.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Mubashir Palapadiyan — MERN Stack Developer Portfolio',
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Mubashir PP — Full Stack MERN Developer",
-    description: "MERN Stack Developer from Kerala building scalable web applications.",
-    images: ["https://mubashiir.in/og-image.png"]
+    card: 'summary_large_image',
+    title: 'Mubashir Palapadiyan — MERN Stack Developer',
+    description:
+      'Full-stack engineer from Kerala. React, Node.js, MongoDB, AWS, Docker.',
+    images: ['/og-image.png'],
   },
-  robots: { index: true, follow: true },
-  alternates: {
-    canonical: "https://mubashiir.in"
-  }
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+    },
+  },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Mubashir PP",
-  "url": "https://mubashiir.in",
-  "jobTitle": "Full Stack MERN Developer",
-  "worksFor": { "@type": "Organization", "name": "Orvyn Labs" },
-  "address": { 
-    "@type": "PostalAddress", 
-    "addressLocality": "Wayanad", 
-    "addressRegion": "Kerala", 
-    "addressCountry": "IN" 
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Mubashir Palapadiyan',
+  alternateName: ['Mubashir PP', 'Mubashir Palapadiyan Developer'],
+  url: 'https://mubashiir.in',
+  image: 'https://mubashiir.in/photo.jpg',
+  jobTitle: 'MERN Stack Developer',
+  description:
+    'Full-stack developer from Wayanad, Kerala, specialising in React, Next.js, Node.js, MongoDB, Docker, and AWS deployments.',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Orvyn Labs',
+    url: 'https://mubashiir.in',
   },
-  "email": "mubashirppofcl@gmail.com",
-  "telephone": "+919072190088",
-  "sameAs": [
-    "https://github.com/mubashirofcl",
-    "https://linkedin.com/in/mubashirpp"
+  alumniOf: [
+    {
+      '@type': 'EducationalOrganization',
+      name: 'University of Calicut',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Brototype',
+    },
   ],
-  "knowsAbout": ["MERN Stack", "Next.js", "React", "Node.js", "MongoDB", "AWS", "Docker", "REST APIs", "JWT Authentication"]
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Wayanad',
+    addressRegion: 'Kerala',
+    addressCountry: 'IN',
+  },
+  sameAs: [
+    'https://github.com/mubashirofcl',
+    'https://linkedin.com/in/mubashirpp',
+  ],
+  knowsAbout: [
+    'React.js', 'Next.js', 'Node.js', 'MongoDB',
+    'Express.js', 'Docker', 'AWS EC2', 'AWS S3',
+    'Tailwind CSS', 'JWT Authentication', 'REST API',
+    'Full Stack Development', 'MERN Stack',
+  ],
+  email: 'mubashirppofcl@gmail.com',
+  telephone: '+919072190088',
 };
 
 export default function RootLayout({
@@ -84,15 +125,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
       <body
         className={`${sora.variable} ${bebasNeue.variable} font-sans bg-[#0a0a0a] text-white antialiased`}
       >
+        <script
+          type="application/ld+json"
+          id="person-schema"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
         {children}
       </body>
     </html>

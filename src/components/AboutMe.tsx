@@ -69,14 +69,20 @@ export default function AboutMe() {
             className="lg:col-span-7 flex flex-col gap-6 text-sm sm:text-base text-[#888888] font-sans font-normal leading-relaxed text-left"
           >
             <p className="text-[#f0f0f0] font-medium text-base sm:text-lg">
-              I am a production-focused MERN Stack Developer with hands-on experience building scalable full-stack applications, AI-integrated platforms, and real-client deployments.
+              Hi, I&apos;m Mubashir Palapadiyan! I&apos;m a passionate web developer based in Wayanad, Kerala, specializing in building complete, user-friendly applications.
             </p>
             <p>
-              I specialize in REST API architecture, secure JWT-based authentication, clean MongoDB schema design, and cloud deployments using AWS S3, CloudFront, Docker, and Nginx. I combine strong backend fundamentals with modern React and Next.js UI development to deliver highly robust systems.
+              Through my studio, Orvyn Labs, I partner with clients to bring their ideas to life. I handle everything from designing the initial interface to launching the final product on reliable servers. My goal is to create digital experiences that look great and work flawlessly behind the scenes.
             </p>
             <p>
-              I hold a Bachelor of Computer Applications (BCA) degree from the University of Calicut (completed in May 2025) and deliver professional web solutions to clients globally through my freelance practice, Orvyn Labs.
+              Whether you need a sleek business website or a complex e-commerce platform, I focus on writing clean code and delivering solutions that truly help your business grow.
             </p>
+            
+            <div className="mt-2">
+              <a href="/about" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-accent-highlight hover:text-[#f0f0f0] transition-colors">
+                Full story →
+              </a>
+            </div>
 
             {/* Social Links Row */}
             <div className="flex flex-wrap gap-4 mt-8 select-none">

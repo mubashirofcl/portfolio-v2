@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useScroll, useTransform, motion } from "framer-motion";
 
 interface OverlayProps {
@@ -47,6 +48,17 @@ export default function Overlay({ heroRef }: OverlayProps) {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-10 font-sans">
+      
+      {/* Global Navigation */}
+      <nav className="absolute top-0 left-0 w-full p-6 flex justify-end pointer-events-auto z-50">
+        <Link 
+          href="/about" 
+          className="text-xs font-sans font-bold uppercase tracking-wider text-[#e8e8e8] hover:text-accent-highlight transition-colors select-none"
+        >
+          About
+        </Link>
+      </nav>
+
       {/* PHASE 1 - Ghost Watermark */}
       <motion.div
         style={{
@@ -77,7 +89,7 @@ export default function Overlay({ heroRef }: OverlayProps) {
         className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none px-6 text-center select-none"
       >
         <span className="text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.25em] text-accent uppercase font-bold mb-4">
-          I Build Scalable Full-Stack Apps
+          I Build Full-Stack Apps That Ship
         </span>
         <h2
           className="text-white tracking-tighter leading-none font-extrabold mb-6"
@@ -90,7 +102,7 @@ export default function Overlay({ heroRef }: OverlayProps) {
           PALAPADIYAN
         </h2>
         <span className="text-[10px] sm:text-xs md:text-sm tracking-[0.05em] sm:tracking-[0.1em] text-white/50 uppercase font-medium max-w-xs sm:max-w-none">
-          MERN Stack Developer &middot; Cloud Integrations &middot; Kerala, India
+          MERN Stack Developer. React, Node.js, MongoDB, AWS. Based in Kerala.
         </span>
       </motion.div>
 

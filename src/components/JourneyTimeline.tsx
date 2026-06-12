@@ -13,23 +13,23 @@ interface ExperienceItem {
 export default function JourneyTimeline() {
   const experiences: ExperienceItem[] = [
     {
-      role: "MERN Stack Developer Trainee",
-      company: "Brototype — Industry-grade Full-Stack Training Program",
-      duration: "Jan 2024 – Present | Kerala",
+      role: "Full-Stack Developer Trainee",
+      company: "Brototype",
+      duration: "Jan 2024 – Present",
       details: [
-        "Production-focused MERN stack training with real-world architecture standards",
-        "Built and deployed 3+ full-stack projects covering auth, payments, and cloud infrastructure",
-        "Expertise developed: Service/Repository pattern, CI/CD, AWS deployment, scalable MongoDB schemas",
+        "Completed a rigorous, hands-on training program focused on modern web development.",
+        "Successfully built and launched multiple complete web applications from scratch.",
+        "Gained deep, practical experience in creating secure logins, managing databases, and hosting websites."
       ],
     },
     {
-      role: "Freelance Web Developer",
-      company: "Orvyn Labs (Self-Founded)",
+      role: "Freelance Web Developer & Founder",
+      company: "Orvyn Labs",
       duration: "Jan 2024 – Present",
       details: [
-        "Founded freelance development practice handling full end-to-end web solutions",
-        "Delivered Azura Resorts (azuraresorts.in) as a live production project",
-        "Manages client requirements, UI/UX, development, and deployment independently",
+        "Founded my own freelance studio to help businesses establish a strong digital presence.",
+        "Successfully delivered live, high-quality projects like the Azura Resorts website.",
+        "Responsible for communicating with clients, designing user interfaces, and ensuring smooth technical delivery."
       ],
     },
   ];

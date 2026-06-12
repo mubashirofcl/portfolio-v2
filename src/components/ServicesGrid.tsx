@@ -20,33 +20,33 @@ interface ServiceItem {
 export default function ServicesGrid() {
   const services: ServiceItem[] = [
     {
-      title: "Full Stack Web Applications",
-      description: "MERN + Next.js systems built for scale, clean architecture, and real-world deployment.",
+      title: "Full-Stack Development",
+      description: "I build complete web applications from the ground up, ensuring a smooth experience for users and a solid, reliable foundation behind the scenes.",
       icon: <Layers className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Business & Client Websites",
-      description: "Luxury, resort, hospitality, and business websites optimised for performance and conversions.",
+      title: "Client & Business Websites",
+      description: "I create beautiful, fast, and responsive websites tailored to your brand, helping you connect with your audience and grow your business.",
       icon: <Globe className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "E-commerce Development",
-      description: "Cart, authentication, payments, admin dashboards, and order management systems.",
+      title: "E-Commerce Solutions",
+      description: "I set up secure online stores with easy-to-use shopping carts, safe payment gateways, and straightforward admin dashboards to manage products.",
       icon: <ShoppingCart className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Backend API Development",
-      description: "REST APIs, JWT auth, role-based access control, and middleware architecture.",
+      title: "Secure Data & Systems",
+      description: "I develop secure backend systems that protect user data, manage logins safely, and connect your app to other essential services smoothly.",
       icon: <Cpu className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Cloud & DevOps",
-      description: "AWS EC2, S3, CloudFront, Docker, Nginx, and GitHub Actions CI/CD pipelines.",
+      title: "Cloud Deployment",
+      description: "I ensure your application is hosted securely on modern cloud platforms so it stays fast, online, and available as your user base grows.",
       icon: <Cloud className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Performance & SEO",
-      description: "Technical SEO, metadata, Core Web Vitals, Next.js image optimisation, and Lighthouse scores.",
+      title: "Performance Optimization",
+      description: "I fine-tune websites so they load instantly and rank well on search engines, providing a seamless browsing experience on any device.",
       icon: <Gauge className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
   ];

@@ -16,28 +16,28 @@ export default function FAQ() {
 
   const faqData: FAQItem[] = [
     {
-      question: "Do you build full-stack applications?",
-      answer: "Yes. I construct production-focused, end-to-end full-stack applications, managing everything from UI styling components to data models, custom middleware, API routes, and cloud configurations.",
+      question: "Can you build an entire website from scratch?",
+      answer: "Yes, absolutely! I handle the entire process. I design the visual parts you interact with, and I build the hidden systems that store data and keep the website running securely.",
     },
     {
-      question: "Do you work with the MERN stack?",
-      answer: "Absolutely. My core operational stack is the MERN architecture: MongoDB (for database collections and aggregation analytics), Express.js (backend middleware frameworks), React.js (responsive presentation pages), and Node.js (high-performance runtime engines).",
+      question: "What technologies do you use?",
+      answer: "I primarily use modern, widely-supported tools like React and Next.js for the interface, and Node.js with MongoDB to manage data behind the scenes. This ensures your website is fast and reliable.",
     },
     {
-      question: "Can you build scalable admin systems?",
-      answer: "Yes. In my NextZen e-commerce project, I architected separate, highly secure Admin and User portals that include role-based access controls, inventory trackers, variant editing, and order lifecycle trackers.",
+      question: "Can you build a dashboard for me to manage my content?",
+      answer: "Yes. I often create secure administrator portals. This allows you to easily manage your own products, track inventory, or update website content without needing to write any code.",
     },
     {
-      question: "Do you deploy production-ready projects?",
-      answer: "Yes. I deploy live client platforms (such as azuraresorts.in) to production. My pipeline uses Docker containers, Nginx reverse proxy configurations, Certbot SSL certifications, and AWS services (EC2, S3, CloudFront CDN) to ensure high availability.",
+      question: "Will my website be fast and mobile-friendly?",
+      answer: "Definitely. Every website I build is designed to look great and work perfectly on smartphones, tablets, and desktop computers. I also optimize images and code so pages load instantly.",
     },
     {
-      question: "Can you optimize application performance?",
-      answer: "Yes. I specialize in backend database optimization (indexing collections, using normalized schema pipelines) which has cut database delays by ~40%. I also set up AWS S3 bucket systems integrated with CloudFront CDN distributions, reducing average media load times by over 60%.",
+      question: "Do you handle the hosting and domain setup?",
+      answer: "Yes, I take care of the technical launch process. I set up secure hosting on reliable cloud platforms and connect your custom domain name so your site is ready for the world to see.",
     },
     {
-      question: "Do you build responsive websites?",
-      answer: "Yes. Every frontend experience I design is completely responsive, ensuring optimal rendering and fluid layout transitions across all desktop, tablet, and mobile viewport devices.",
+      question: "Can you integrate payment gateways like Razorpay?",
+      answer: "Yes. I have experience setting up secure online payment systems. Whether you are selling products or accepting bookings, I can integrate reliable payment options directly into your platform.",
     },
   ];
 

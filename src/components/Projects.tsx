@@ -13,6 +13,7 @@ interface Project {
   githubUrl?: string;
   stack: string;
   description: string;
+  bullets: string[];
   featureTags: string[];
   imageSrc: string;
 }
@@ -25,9 +26,14 @@ export default function Projects() {
       liveUrl: "https://nextzen.mubashiir.in",
       githubUrl: "https://github.com/mubashirofcl",
       stack: "React.js · Node.js · MongoDB · AWS · Docker",
-      description: "Architected a production-grade MERN e-commerce platform with separate Admin and User systems, JWT auth with token rotation, Razorpay payments, wallet system, AWS S3 + CloudFront CDN, and a Gemini-powered LLM product chatbot. Deployed via Docker on AWS EC2 with Nginx and GitHub Actions CI/CD.",
+      description: "A complete, high-performance e-commerce platform built to handle seamless shopping experiences. It includes advanced product variations, secure checkout, and an intelligent AI chatbot.",
+      bullets: [
+        "Secure user logins and dedicated management dashboards for administrators.",
+        "Optimized database searches so products load incredibly fast for users.",
+        "Hosted on reliable cloud servers ensuring fast image loading and smooth performance."
+      ],
       featureTags: ["JWT Auth", "RBAC", "Admin Dashboard", "Razorpay", "Google OAuth", "AWS", "CI/CD", "Chatbot", "Wishlist", "Cart"],
-      imageSrc: "/nextzen_mockup.png",
+      imageSrc: "/nextzen_mockup.webp",
     },
     {
       title: "AZURA RESORTS",
@@ -36,18 +42,28 @@ export default function Projects() {
       liveUrl: "https://azuraresorts.in",
       githubUrl: "https://github.com/mubashirofcl",
       stack: "Next.js · Tailwind CSS · Framer Motion · Vercel",
-      description: "Delivered a fully responsive luxury resort website for a real client in Wayanad. Handled complete frontend development, Framer Motion animations, React Lenis smooth scrolling, and production deployment on Vercel with custom domain DNS configuration.",
+      description: "A premium, beautifully animated website designed for a luxury resort in Wayanad. The goal was to provide visitors with a visually stunning and smooth browsing experience.",
+      bullets: [
+        "Fluid scrolling and elegant animations that create a premium feel.",
+        "Fully responsive design that looks perfect on phones, tablets, and desktops.",
+        "Securely launched with a custom domain and fast global hosting."
+      ],
       featureTags: ["Client Project", "Next.js", "Framer Motion", "Vercel", "Glassmorphism", "Custom Domain", "SEO"],
-      imageSrc: "/azura_mockup.png",
+      imageSrc: "/azura_mockup.webp",
     },
     {
       title: "QUICKMEDI",
       badge: "Full Stack — Hybrid Architecture",
       githubUrl: "https://github.com/mubashirofcl",
       stack: "React.js · Node.js · Python · MongoDB",
-      description: "Built a full-stack medicine availability finder enabling users to locate real-time medicine stock at nearby pharmacies using prescriptions. Designed a hybrid MERN + Python architecture with a Python-based pharmacy simulation backend, Node.js middleware, and React frontend.",
+      description: "An innovative platform that helps users find available medicines at nearby pharmacies in real-time by analyzing their medical prescriptions.",
+      bullets: [
+        "Connects a user-friendly frontend to a custom-built pharmacy data system.",
+        "Provides fast, reliable search results to help users get what they need quickly.",
+        "Designed with clean, modular code to easily add more pharmacies in the future."
+      ],
       featureTags: ["Hybrid Architecture", "Python Backend", "MERN", "Real-time", "Prescription Search"],
-      imageSrc: "/quickmedi_mockup.png",
+      imageSrc: "/quickmedi_mockup.webp",
     },
   ];
 
@@ -92,13 +108,14 @@ export default function Projects() {
                   <div className="absolute inset-0 bg-[#c8f542]/[0.01] filter blur-[80px] pointer-events-none rounded-2xl" />
 
                   {/* Frame */}
-                  <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-[#1f1f1f] bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:scale-[1.01] hover:border-white/10 group">
+                  <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-[#1f1f1f] bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:scale-[1.01] hover:border-white/10 group flex items-center justify-center">
                     <Image
                       src={project.imageSrc}
                       alt={`${project.title} Interface Mockup`}
-                      fill
+                      width={1200}
+                      height={750}
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03] select-none"
+                      className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-[1.03] select-none"
                       loading="lazy"
                     />
                   </div>
@@ -132,9 +149,15 @@ export default function Projects() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-[#888888] leading-relaxed font-normal mb-6 max-w-lg select-all">
+                  <p className="text-xs sm:text-sm text-[#888888] font-normal mb-3 max-w-lg select-all">
                     {project.description}
                   </p>
+
+                  <ul className="list-disc pl-4 text-xs sm:text-sm text-[#888888] leading-relaxed font-normal mb-6 max-w-lg select-all space-y-1">
+                    {project.bullets.map((bullet, bIdx) => (
+                      <li key={bIdx}>{bullet}</li>
+                    ))}
+                  </ul>
 
                   {/* Feature tag pills */}
                   <div className="flex flex-wrap gap-1.5 mb-8 select-all">
