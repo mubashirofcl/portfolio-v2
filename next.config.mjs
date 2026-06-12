@@ -26,21 +26,6 @@ const nextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'www.mubashiir.in',
-          },
-        ],
-        destination: 'https://mubashiir.in/:path*',
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
