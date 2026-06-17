@@ -69,18 +69,18 @@ export default function AboutMe() {
             className="lg:col-span-7 flex flex-col gap-6 text-sm sm:text-base text-[#888888] font-sans font-normal leading-relaxed text-left"
           >
             <p className="text-[#f0f0f0] font-medium text-base sm:text-lg">
-              Hi, I&apos;m Mubashir Palapadiyan! I&apos;m a passionate web developer based in Wayanad, Kerala, specializing in building complete, user-friendly applications.
+              Hi, I&apos;m Mubashir Palapadiyan! I&apos;m a Full Stack MERN Developer based in Wayanad, Kerala, specializing in architecting scalable React.js frontends and robust Node.js backends.
             </p>
             <p>
-              Through my studio, Orvyn Labs, I partner with clients to bring their ideas to life. I handle everything from designing the initial interface to launching the final product on reliable servers. My goal is to create digital experiences that look great and work flawlessly behind the scenes.
+              Through my studio, Orvyn Labs, I partner with businesses to build high-performance web applications. From designing intuitive user interfaces to deploying complex MongoDB databases on AWS, I handle the complete end-to-end development lifecycle.
             </p>
             <p>
-              Whether you need a sleek business website or a complex e-commerce platform, I focus on writing clean code and delivering solutions that truly help your business grow.
+              Whether you need a custom e-commerce platform, a Next.js corporate website, or a secure REST API, my focus is on writing clean, maintainable code that drives real business growth and provides an exceptional user experience.
             </p>
             
             <div className="mt-2">
               <a href="/about" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-accent-highlight hover:text-[#f0f0f0] transition-colors">
-                Full story →
+                Read my full developer journey →
               </a>
             </div>
 

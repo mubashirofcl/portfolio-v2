@@ -68,7 +68,8 @@ export default function Overlay({ heroRef }: OverlayProps) {
         }}
         className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none px-6 text-center select-none"
       >
-        <h1
+        <div
+          aria-hidden="true"
           className="text-white/20 sm:text-white/10 tracking-tighter uppercase whitespace-nowrap leading-none select-none"
           style={{
             fontSize: "clamp(3rem, 17vw, 14rem)",
@@ -76,7 +77,7 @@ export default function Overlay({ heroRef }: OverlayProps) {
           }}
         >
           MUBASHIR.
-        </h1>
+        </div>
       </motion.div>
 
       {/* PHASE 2 - Name Intro Block */}
@@ -91,7 +92,7 @@ export default function Overlay({ heroRef }: OverlayProps) {
         <span className="text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.25em] text-accent uppercase font-bold mb-4">
           I Build Full-Stack Apps That Ship
         </span>
-        <h2
+        <h1
           className="text-white tracking-tighter leading-none font-extrabold mb-6"
           style={{
             fontSize: "clamp(2rem, 8vw, 9rem)",
@@ -100,7 +101,7 @@ export default function Overlay({ heroRef }: OverlayProps) {
         >
           MUBASHIR
           PALAPADIYAN
-        </h2>
+        </h1>
         <span className="text-[10px] sm:text-xs md:text-sm tracking-[0.05em] sm:tracking-[0.1em] text-white/50 uppercase font-medium max-w-xs sm:max-w-none">
           MERN Stack Developer. React, Node.js, MongoDB, AWS. Based in Kerala.
         </span>

@@ -26,11 +26,11 @@ export default function Projects() {
       liveUrl: "https://nextzen.mubashiir.in",
       githubUrl: "https://github.com/mubashirofcl",
       stack: "React.js · Node.js · MongoDB · AWS · Docker",
-      description: "A complete, high-performance e-commerce platform built to handle seamless shopping experiences. It includes advanced product variations, secure checkout, and an intelligent AI chatbot.",
+      description: "A complete, high-performance MERN stack e-commerce platform built to handle seamless shopping experiences. It includes advanced product variations, secure checkout, and an intelligent AI chatbot.",
       bullets: [
-        "Secure user logins and dedicated management dashboards for administrators.",
-        "Optimized database searches so products load incredibly fast for users.",
-        "Hosted on reliable cloud servers ensuring fast image loading and smooth performance."
+        "Implemented secure JWT authentication and RBAC for dedicated admin management dashboards.",
+        "Engineered optimized MongoDB aggregations for lightning-fast product search and filtering.",
+        "Deployed on AWS EC2 with Docker containers ensuring scalable and smooth performance."
       ],
       featureTags: ["JWT Auth", "RBAC", "Admin Dashboard", "Razorpay", "Google OAuth", "AWS", "CI/CD", "Chatbot", "Wishlist", "Cart"],
       imageSrc: "/nextzen_mockup.webp",
@@ -42,11 +42,11 @@ export default function Projects() {
       liveUrl: "https://azuraresorts.in",
       githubUrl: "https://github.com/mubashirofcl",
       stack: "Next.js · Tailwind CSS · Framer Motion · Vercel",
-      description: "A premium, beautifully animated website designed for a luxury resort in Wayanad. The goal was to provide visitors with a visually stunning and smooth browsing experience.",
+      description: "A premium, beautifully animated Next.js website designed for a luxury resort in Wayanad. Focused on SEO optimization and providing visitors with a visually stunning browsing experience.",
       bullets: [
-        "Fluid scrolling and elegant animations that create a premium feel.",
-        "Fully responsive design that looks perfect on phones, tablets, and desktops.",
-        "Securely launched with a custom domain and fast global hosting."
+        "Developed fluid scroll interactions and elegant Framer Motion animations for a premium feel.",
+        "Built a fully responsive frontend architecture tailored for high Core Web Vitals scores.",
+        "Configured custom domains and deployed via Vercel for fast global edge network delivery."
       ],
       featureTags: ["Client Project", "Next.js", "Framer Motion", "Vercel", "Glassmorphism", "Custom Domain", "SEO"],
       imageSrc: "/azura_mockup.webp",
@@ -56,11 +56,11 @@ export default function Projects() {
       badge: "Full Stack — Hybrid Architecture",
       githubUrl: "https://github.com/mubashirofcl",
       stack: "React.js · Node.js · Python · MongoDB",
-      description: "An innovative platform that helps users find available medicines at nearby pharmacies in real-time by analyzing their medical prescriptions.",
+      description: "An innovative full-stack healthcare platform that helps users find available medicines at nearby pharmacies in real-time by analyzing their medical prescriptions via AI.",
       bullets: [
-        "Connects a user-friendly frontend to a custom-built pharmacy data system.",
-        "Provides fast, reliable search results to help users get what they need quickly.",
-        "Designed with clean, modular code to easily add more pharmacies in the future."
+        "Architected a scalable hybrid system connecting a React frontend to a custom Python data engine.",
+        "Developed real-time pharmacy search functionality using geospatial MongoDB queries.",
+        "Designed clean, modular REST API endpoints to easily onboard new pharmacy networks."
       ],
       featureTags: ["Hybrid Architecture", "Python Backend", "MERN", "Real-time", "Prescription Search"],
       imageSrc: "/quickmedi_mockup.webp",
@@ -111,7 +111,7 @@ export default function Projects() {
                   <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-[#1f1f1f] bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:scale-[1.01] hover:border-white/10 group flex items-center justify-center">
                     <Image
                       src={project.imageSrc}
-                      alt={`${project.title} Interface Mockup`}
+                      alt={`${project.title} - ${project.badge} Web Application`}
                       width={1200}
                       height={750}
                       sizes="(max-width: 1024px) 100vw, 50vw"

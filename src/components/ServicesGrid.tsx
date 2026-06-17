@@ -20,33 +20,33 @@ interface ServiceItem {
 export default function ServicesGrid() {
   const services: ServiceItem[] = [
     {
-      title: "Full-Stack Development",
-      description: "I build complete web applications from the ground up, ensuring a smooth experience for users and a solid, reliable foundation behind the scenes.",
+      title: "Full-Stack MERN Architecture",
+      description: "Architecting scalable web applications using React.js frontends and robust Node.js backends. Delivering end-to-end MERN stack solutions.",
       icon: <Layers className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Client & Business Websites",
-      description: "I create beautiful, fast, and responsive websites tailored to your brand, helping you connect with your audience and grow your business.",
+      title: "Next.js Web Development",
+      description: "Building blazing-fast, SEO-optimized, and highly responsive Next.js websites tailored to elevate your brand and drive business conversions.",
       icon: <Globe className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "E-Commerce Solutions",
-      description: "I set up secure online stores with easy-to-use shopping carts, safe payment gateways, and straightforward admin dashboards to manage products.",
+      title: "Custom E-Commerce Platforms",
+      description: "Developing secure e-commerce systems with custom payment gateway integrations, seamless checkout flows, and comprehensive admin dashboards.",
       icon: <ShoppingCart className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Secure Data & Systems",
-      description: "I develop secure backend systems that protect user data, manage logins safely, and connect your app to other essential services smoothly.",
+      title: "REST APIs & Database Design",
+      description: "Designing secure REST APIs and structuring high-performance MongoDB databases to ensure data integrity and seamless cross-platform integration.",
       icon: <Cpu className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Cloud Deployment",
-      description: "I ensure your application is hosted securely on modern cloud platforms so it stays fast, online, and available as your user base grows.",
+      title: "AWS & Docker Deployment",
+      description: "Deploying applications on reliable cloud infrastructures like AWS using Docker containers for CI/CD pipelines and maximum scalability.",
       icon: <Cloud className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Performance Optimization",
-      description: "I fine-tune websites so they load instantly and rank well on search engines, providing a seamless browsing experience on any device.",
+      title: "Technical SEO & Optimization",
+      description: "Optimizing Core Web Vitals, implementing semantic HTML, and improving load times to help your application rank higher on search engines.",
       icon: <Gauge className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
   ];

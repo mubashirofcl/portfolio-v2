@@ -21,7 +21,12 @@ export const metadata: Metadata = {
     template: '%s | Mubashir Palapadiyan',
   },
   description:
-    'Portfolio of Mubashir Palapadiyan (Mubashir PP), a MERN Stack Developer from Wayanad, Kerala. Builds scalable full-stack apps with React, Next.js, Node.js, MongoDB, AWS, and Docker.',
+    'Freelance MERN Stack Developer in Kerala, India. Specializing in architecting scalable full-stack web applications with React, Next.js, Node.js, MongoDB, AWS, and Docker. Founder of Orvyn Labs.',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
   keywords: [
     'Mubashir Palapadiyan',
     'Mubashir PP',
@@ -118,6 +123,34 @@ const personSchema = {
   telephone: '+919072190088',
 };
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Mubashir Palapadiyan - Portfolio',
+  url: 'https://mubashiir.in',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://mubashiir.in/?s={search_term_string}',
+    'query-input': 'required name=search_term_string'
+  }
+};
+
+const professionalServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Mubashir Palapadiyan - Freelance Web Developer',
+  image: 'https://mubashiir.in/photo.jpg',
+  url: 'https://mubashiir.in',
+  telephone: '+919072190088',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Wayanad',
+    addressRegion: 'Kerala',
+    addressCountry: 'IN',
+  },
+  priceRange: '$$'
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -130,8 +163,8 @@ export default function RootLayout({
       >
         <script
           type="application/ld+json"
-          id="person-schema"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          id="schema-markup"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([personSchema, websiteSchema, professionalServiceSchema]) }}
         />
         {children}
       </body>
