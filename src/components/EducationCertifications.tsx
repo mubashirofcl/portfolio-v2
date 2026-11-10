@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function EducationCertifications() {
   return (
-    <section id="education" className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section id="education" className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Title */}
@@ -19,16 +19,16 @@ export default function EducationCertifications() {
           </h2>
         </div>
 
-        {/* Side by Side Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        {/* Three Columns Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           
-          {/* Card 1 — Education */}
+          {/* Card 1 — Academic Degree */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 flex flex-col justify-between min-h-[260px] group transition-all duration-300 hover:border-[#e8e8e8]/20 hover:bg-[#141414]"
+            className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 flex flex-col justify-between min-h-[280px] group transition-all duration-300 hover:border-[#e8e8e8]/20 hover:bg-[#141414]"
           >
             <div>
               <span className="text-[9px] font-sans font-extrabold tracking-widest text-[#888888] uppercase block mb-3 select-none">
@@ -37,12 +37,15 @@ export default function EducationCertifications() {
               <h3 className="text-xl sm:text-2xl font-sans font-bold text-[#f0f0f0] tracking-wide mb-2 select-all">
                 Bachelor of Computer Applications (BCA)
               </h3>
-              <span className="text-xs sm:text-sm font-sans font-medium text-[#888888] tracking-wide block mb-6 select-all">
+              <span className="text-xs sm:text-sm font-sans font-medium text-[#888888] tracking-wide block mb-4 select-all">
                 University of Calicut &middot; Aug 2022 – May 2025
               </span>
+              <p className="text-xs text-[#777777] font-sans leading-relaxed select-all">
+                Foundations in computer science, software engineering, relational databases, data structures, and computer networking.
+              </p>
             </div>
 
-            <div className="border-t border-[#1f1f1f] pt-6 flex flex-wrap gap-x-8 gap-y-3 select-all">
+            <div className="border-t border-[#1f1f1f] pt-5 flex flex-wrap gap-x-6 gap-y-2 select-all mt-4">
               <div className="flex flex-col">
                 <span className="text-[9px] font-sans font-black tracking-widest text-[#888888]/40 uppercase mb-0.5 select-none">
                   CGPA Metric
@@ -53,22 +56,55 @@ export default function EducationCertifications() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[9px] font-sans font-black tracking-widest text-[#888888]/40 uppercase mb-0.5 select-none">
-                  Credit Systems
+                  Total Credits
                 </span>
                 <span className="text-sm font-sans font-bold text-[#e8e8e8]">
-                  Total Credits: 140 (NSS — 4 Credits)
+                  140 Credits
                 </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Card 2 — Certification */}
+          {/* Card 2 — Professional Training */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 flex flex-col justify-between min-h-[260px] group transition-all duration-300 hover:border-[#e8e8e8]/20 hover:bg-[#141414]"
+            className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 flex flex-col justify-between min-h-[280px] group transition-all duration-300 hover:border-[#e8e8e8]/20 hover:bg-[#141414]"
+          >
+            <div>
+              <span className="text-[9px] font-sans font-extrabold tracking-widest text-[#888888] uppercase block mb-3 select-none">
+                Intensive Engineering Training
+              </span>
+              <h3 className="text-xl sm:text-2xl font-sans font-bold text-[#f0f0f0] tracking-wide mb-2 select-all">
+                MERN Stack Development Program
+              </h3>
+              <span className="text-xs sm:text-sm font-sans font-medium text-[#888888] tracking-wide block mb-4 select-all">
+                Brototype, Calicut
+              </span>
+              <p className="text-xs text-[#777777] font-sans leading-relaxed select-all">
+                Production-focused rigorous curriculum in REST API design, middleware architecture, Service/Repository pattern, API-to-UI data flow, MongoDB schema design, and AWS cloud deployment.
+              </p>
+            </div>
+
+            <div className="border-t border-[#1f1f1f] pt-5 flex items-center justify-between select-all mt-4">
+              <span className="text-xs font-sans font-semibold text-accent-highlight">
+                Production & Architecture Focus
+              </span>
+              <span className="text-[9px] font-sans font-black tracking-widest text-[#888888]/40 uppercase">
+                CALICUT
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Card 3 — Certification */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 flex flex-col justify-between min-h-[280px] group transition-all duration-300 hover:border-[#e8e8e8]/20 hover:bg-[#141414]"
           >
             <div>
               <span className="text-[9px] font-sans font-extrabold tracking-widest text-[#888888] uppercase block mb-3 select-none">
@@ -77,12 +113,15 @@ export default function EducationCertifications() {
               <h3 className="text-xl sm:text-2xl font-sans font-bold text-[#f0f0f0] tracking-wide mb-2 select-all">
                 Foundations of Coding Full-Stack
               </h3>
-              <span className="text-xs sm:text-sm font-sans font-medium text-[#888888] tracking-wide block mb-6 select-all">
+              <span className="text-xs sm:text-sm font-sans font-medium text-[#888888] tracking-wide block mb-4 select-all">
                 Microsoft &middot; Coursera &middot; April 2026
               </span>
+              <p className="text-xs text-[#777777] font-sans leading-relaxed select-all">
+                Certified foundational mastery of full-stack engineering principles, data structures, web protocols, and modern development standards.
+              </p>
             </div>
 
-            <div className="border-t border-[#1f1f1f] pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="border-t border-[#1f1f1f] pt-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-4">
               <div className="flex flex-col select-all">
                 <span className="text-[9px] font-sans font-black tracking-widest text-[#888888]/40 uppercase mb-0.5 select-none">
                   Credential ID
@@ -96,9 +135,9 @@ export default function EducationCertifications() {
                 href="https://coursera.org/verify/RYXAW17HITHH"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#e8e8e8] px-4 py-2.5 rounded-xl transition-all duration-300 hover:bg-accent-highlight hover:text-[#0a0a0a] select-none"
+                className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#e8e8e8] px-3.5 py-2 rounded-xl transition-all duration-300 hover:bg-accent-highlight hover:text-[#0a0a0a] select-none"
               >
-                Verify Link <ArrowUpRight size={14} />
+                Verify <ArrowUpRight size={13} />
               </a>
             </div>
           </motion.div>

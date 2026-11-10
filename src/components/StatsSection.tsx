@@ -57,14 +57,14 @@ function StatCounterCard({ target, suffix, label }: StatItemProps) {
 
 export default function StatsSection() {
   const statsList = [
-    { target: 3, suffix: "+", label: "Projects Completed" },
-    { target: 10, suffix: "+", label: "Technologies Mastered" },
-    { target: 1, suffix: "", label: "Live Client Deployment" },
-    { target: 1000, suffix: "+", label: "Hours of Development" },
+    { target: 5, suffix: "+", label: "Projects & AI Pipelines" },
+    { target: 25, suffix: "+", label: "Technologies & Cloud Tools" },
+    { target: 2, suffix: "", label: "Live Client Platforms" },
+    { target: 1000, suffix: "+", label: "Hours of Production Dev" },
   ];
 
   return (
-    <section className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {statsList.map((stat, idx) => (

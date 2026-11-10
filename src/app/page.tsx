@@ -10,7 +10,6 @@ import ServicesGrid from "@/components/ServicesGrid";
 import SkillsStack from "@/components/SkillsStack";
 import JourneyTimeline from "@/components/JourneyTimeline";
 import Projects from "@/components/Projects";
-import OngoingProject from "@/components/OngoingProject";
 import EducationCertifications from "@/components/EducationCertifications";
 import FreelanceHire from "@/components/FreelanceHire";
 import StatsSection from "@/components/StatsSection";
@@ -18,7 +17,8 @@ import ResumeDownload from "@/components/ResumeDownload";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
-import CursorRevealBackground from "@/components/CursorRevealBackground";
+import HalftoneBloom from "@/components/HalftoneBloom";
+import Masthead from "@/components/Masthead";
 
 export default function Home() {
   // Shared ref controlling the canvas frames and overlays simultaneously
@@ -26,8 +26,11 @@ export default function Home() {
 
   return (
     <main className="bg-[#0a0a0a] min-h-screen text-white relative">
+      {/* Editorial Masthead Reveal Preloader */}
+      <Masthead />
+
       {/* Hero Scroll System: 500vh scroll space */}
-      <div ref={heroRef} style={{ position: "relative", height: "500vh" }}>
+      <div ref={heroRef} className="relative z-10" style={{ height: "500vh" }}>
         <ScrollyCanvas heroRef={heroRef} />
         <Overlay heroRef={heroRef} />
       </div>
@@ -53,9 +56,6 @@ export default function Home() {
       {/* Selected projects alternating case studies */}
       <Projects />
 
-      {/* Current ongoing project details */}
-      <OngoingProject />
-
       {/* Academics & Coursera certification credentials */}
       <EducationCertifications />
 
@@ -77,8 +77,8 @@ export default function Home() {
       {/* Sticky viewport floating CTA */}
       <FloatingCTA />
 
-      {/* Global high-tech cursor-reveal overlay grid and glow */}
-      <CursorRevealBackground />
+      {/* Halftone Bloom interactive halftone ribbons background */}
+      <HalftoneBloom />
     </main>
   );
 }

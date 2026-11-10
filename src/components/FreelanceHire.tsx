@@ -6,17 +6,17 @@ import { ArrowRight, MapPin } from "lucide-react";
 
 export default function FreelanceHire() {
   const servicesList = [
-    "Business Websites",
-    "Portfolio Websites",
-    "MERN Full Stack Applications",
-    "Admin Dashboards",
-    "E-commerce Platforms",
-    "Landing Pages",
-    "Booking Systems",
+    "Full-Stack MERN & Next.js Platforms",
+    "Production E-Commerce & Payment Gateways",
+    "AI Integrations & Custom RAG Pipelines",
+    "Microservices & REST API Architecture",
+    "Role-Based Admin Dashboards",
+    "Performance Audits & Production Bug Remediation",
+    "Cloud Infrastructure (Docker & AWS CI/CD)",
   ];
 
   return (
-    <section id="hire" className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section id="hire" className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Heading */}
@@ -64,10 +64,10 @@ export default function FreelanceHire() {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="lg:col-span-6 flex flex-col gap-4 w-full text-left"
           >
-            {/* Start a Project (Primary Lime Button) */}
+            {/* Start a Project (Primary Action Button) */}
             <a
               href="#contact"
-              className="inline-flex items-center justify-between text-sm font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-accent-highlight border border-accent-highlight rounded-xl px-6 py-4 transition-all duration-300 hover:bg-[#b5e02c] hover:border-[#b5e02c] shadow-[0_4px_14px_rgba(200,245,66,0.15)] select-none"
+              className="inline-flex items-center justify-between text-sm font-sans font-bold uppercase tracking-wider text-white bg-accent-highlight border border-accent-highlight rounded-xl px-6 py-4 transition-all duration-300 hover:bg-accent-hover hover:border-accent-hover shadow-[0_4px_20px_rgba(83,79,255,0.35)] select-none"
             >
               Start a Project <ArrowRight size={16} />
             </a>
@@ -94,7 +94,7 @@ export default function FreelanceHire() {
             <div className="flex items-start gap-2.5 mt-6 select-all">
               <MapPin size={14} className="text-accent-highlight mt-0.5 shrink-0" />
               <p className="text-xs font-sans font-medium text-[#888888] leading-relaxed">
-                Based in Wayanad, Kerala — Available for remote freelance projects worldwide.
+                Based in Wayanad, Kerala — Open to Relocation, Full-Time Roles & Remote Engineering Worldwide.
               </p>
             </div>
           </motion.div>

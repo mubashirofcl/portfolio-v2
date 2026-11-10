@@ -25,7 +25,7 @@ export default function AboutContent() {
   };
 
   const skills = [
-    "React", "Next.js", "Node.js", "MongoDB", "Docker", "AWS", "Tailwind", "JWT", "Razorpay", "Gemini API"
+    "React.js", "Next.js", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "Prisma ORM", "Docker", "AWS EC2/S3", "RAG Pipelines", "Gemini API", "Groq (Llama 3.3)", "Turborepo", "WebSockets"
   ];
 
   return (
@@ -63,52 +63,52 @@ export default function AboutContent() {
             ABOUT ME
           </span>
           <h1 className="text-4xl sm:text-5xl font-display text-[#f0f0f0] tracking-wider leading-none uppercase mb-2">
-            Mubashir Palapadiyan
+            Mubashir PP
           </h1>
           <h2 className="text-sm sm:text-base text-[#888888] font-sans font-medium mb-8 uppercase tracking-wide">
-            MERN Stack Developer · Wayanad, Kerala
+            Full-Stack Developer &amp; AI Engineering Mentor &middot; Wayanad, Kerala (Open to Relocation)
           </h2>
 
-          <div className="space-y-5 text-sm sm:text-base text-[#aaaaaa] font-sans font-light leading-relaxed mb-10 max-w-2xl">
+          <div className="space-y-5 text-sm sm:text-base text-[#888888] font-sans font-light leading-relaxed mb-10 max-w-2xl">
             <p>
-              Hi, I&apos;m Mubashir! I am a passionate web developer who loves turning great ideas into fully functioning, beautiful websites. Through my freelance studio, Orvyn Labs, I partner with businesses to build everything from engaging landing pages to complex online stores.
+              Hi, I&apos;m Mubashir PP! I am a Full-Stack MERN Developer and AI Engineering Mentor at HACA, Calicut, as well as the founder of Orvyn Labs. I specialize in architecting and shipping scalable web applications, distributed backend architectures, and intelligent AI-powered solutions.
             </p>
             <p>
-              My journey started with a Bachelor&apos;s degree in Computer Applications from the University of Calicut, followed by an intensive hands-on training program at Brototype. There, I gained practical experience building secure platforms, integrating payment gateways, and safely launching websites onto the internet.
+              My background combines foundational computer science through a BCA from the University of Calicut with intensive full-stack architectural training at Brototype. Over the past years, I have architected high-throughput REST APIs, modeled normalized databases in MongoDB and PostgreSQL with Prisma ORM, engineered JWT token rotation with role-based access control, and automated continuous delivery with Docker and AWS.
             </p>
             <p>
-              I believe in writing clean code and creating designs that are genuinely easy for people to use. Whether you need to launch a brand new idea or improve an existing platform, I am dedicated to delivering high-quality results. I am currently open to exciting freelance projects and full-time opportunities.
+              Through Orvyn Labs, I build and maintain live production platforms for clients, notably BIG4 Tiles &amp; Sanitary (big4.co.in) and Azura Resorts (azuraresorts.in). I actively engineer RAG pipelines leveraging the Google Gemini API, Groq (Llama 3.3), and MongoDB Atlas vector search, alongside evaluating models in dedicated evaluation labs. I am open to full-time software engineering roles and strategic freelance collaborations worldwide.
             </p>
           </div>
 
           {/* Stats Row */}
           <motion.div variants={fadeInUp} className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 p-5 rounded-xl bg-[#111111]/40" style={{ border: "1px solid rgba(255,255,255,0.06)" }}>
             <div className="flex flex-col">
-              <span className="text-2xl font-display text-white mb-1">3+</span>
+              <span className="text-2xl font-display text-white mb-1">5+</span>
               <span className="text-[10px] text-[#666] uppercase tracking-wider font-bold">Projects Shipped</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-display text-white mb-1">2+</span>
-              <span className="text-[10px] text-[#666] uppercase tracking-wider font-bold">Years Building</span>
+              <span className="text-2xl font-display text-white mb-1">2</span>
+              <span className="text-[10px] text-[#666] uppercase tracking-wider font-bold">Live Client Platforms</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-display text-white mb-1">10+</span>
-              <span className="text-[10px] text-[#666] uppercase tracking-wider font-bold">Tech Stack</span>
+              <span className="text-2xl font-display text-white mb-1">25+</span>
+              <span className="text-[10px] text-[#666] uppercase tracking-wider font-bold">Tech Stack &amp; Tools</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-display text-white mb-1">1</span>
-              <span className="text-[10px] text-[#666] uppercase tracking-wider font-bold">Live Client</span>
+              <span className="text-2xl font-display text-white mb-1">HACA</span>
+              <span className="text-[10px] text-[#666] uppercase tracking-wider font-bold">MERN &amp; AI Mentor</span>
             </div>
           </motion.div>
 
           {/* Actions */}
           <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center mb-10">
-            <Link href="/#projects" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#e8e8e8] px-6 py-3.5 rounded-xl transition-all duration-300 hover:bg-accent-highlight hover:text-[#0a0a0a]">
+            <Link href="/#projects" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#e8e8e8] px-6 py-3.5 rounded-xl transition-all duration-300 hover:bg-accent-highlight hover:text-white">
               View My Work <ArrowUpRight size={14} />
             </Link>
-            <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#e8e8e8] border border-[#1f1f1f] bg-[#0a0a0a] px-6 py-3.5 rounded-xl transition-all duration-300 hover:border-accent-highlight hover:text-[#ffffff]">
+            <a href="/resume.pdf" download="Mubashir_PP_Full_Stack_Resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#e8e8e8] border border-[#1f1f1f] bg-[#0a0a0a] px-6 py-3.5 rounded-xl transition-all duration-300 hover:border-accent-highlight hover:text-[#ffffff]">
               Download Resume <Download size={14} />
-            </Link>
+            </a>
             <Link href="/#contact" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#e8e8e8] border border-[#1f1f1f] bg-[#0a0a0a] px-6 py-3.5 rounded-xl transition-all duration-300 hover:border-[#444] hover:text-[#ffffff]">
               Get In Touch <Mail size={14} />
             </Link>

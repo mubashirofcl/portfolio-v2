@@ -42,7 +42,7 @@ const DEFAULT_IMAGES: DomeGalleryImage[] = [
     alt: 'Docker'
   },
   {
-    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg',
     alt: 'AWS'
   },
   {
@@ -80,6 +80,18 @@ const DEFAULT_IMAGES: DomeGalleryImage[] = [
   {
     src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
     alt: 'CSS3'
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    alt: 'PostgreSQL'
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg',
+    alt: 'Prisma'
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg',
+    alt: 'Postman'
   }
 ];
 
@@ -171,6 +183,7 @@ interface DomeGalleryProps {
   imageBorderRadius?: string;
   openedImageBorderRadius?: string;
   grayscale?: boolean;
+  grayscaleOnHover?: boolean;
 }
 
 export default function DomeGallery({
@@ -190,7 +203,8 @@ export default function DomeGallery({
   openedImageHeight = '350px',
   imageBorderRadius = '30px',
   openedImageBorderRadius = '30px',
-  grayscale = true
+  grayscale = false,
+  grayscaleOnHover = true
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -275,6 +289,7 @@ export default function DomeGallery({
       root.style.setProperty('--tile-radius', imageBorderRadius);
       root.style.setProperty('--enlarge-radius', openedImageBorderRadius);
       root.style.setProperty('--image-filter', grayscale ? 'grayscale(1)' : 'none');
+      root.style.setProperty('--image-hover-filter', grayscaleOnHover ? 'grayscale(1)' : 'none');
       applyTransform(rotationRef.current.x, rotationRef.current.y);
 
       const enlargedOverlay = viewerRef.current?.querySelector('.enlarge') as HTMLElement;
@@ -313,6 +328,7 @@ export default function DomeGallery({
     padFactor,
     overlayBlurColor,
     grayscale,
+    grayscaleOnHover,
     imageBorderRadius,
     openedImageBorderRadius,
     openedImageWidth,
@@ -665,7 +681,8 @@ export default function DomeGallery({
         '--overlay-blur-color': overlayBlurColor,
         '--tile-radius': imageBorderRadius,
         '--enlarge-radius': openedImageBorderRadius,
-        '--image-filter': grayscale ? 'grayscale(1)' : 'none'
+        '--image-filter': grayscale ? 'grayscale(1)' : 'none',
+        '--image-hover-filter': grayscaleOnHover ? 'grayscale(1)' : 'none'
       } as React.CSSProperties}
     >
       <main ref={mainRef} className="sphere-main">

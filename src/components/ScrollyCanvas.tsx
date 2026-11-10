@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useScroll, useSpring, useMotionValueEvent } from "framer-motion";
 
 interface ScrollyCanvasProps {
   heroRef: React.RefObject<HTMLDivElement>;
@@ -9,13 +9,22 @@ interface ScrollyCanvasProps {
 
 export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const lastDrawnFrameRef = useRef<number | null>(null);
+  const imagesRef = useRef<(HTMLImageElement | null)[]>([]);
+  const lastDrawnFrameRef = useRef<number>(-1);
+  const rafIdRef = useRef<number | null>(null);
   const totalFrames = 120;
 
   // Use the shared heroRef for scroll target
   const { scrollYProgress } = useScroll({
     target: heroRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Physics-based spring smoothing for liquid-smooth canvas scrubbing
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 28,
+    restDelta: 0.0001,
   });
 
   const pad = (num: number) => String(num).padStart(3, "0");
@@ -27,13 +36,31 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const img = imagesRef.current[index];
-    if (!img || !img.complete) return;
+    // Get image or closest loaded fallback to prevent any black/empty frames
+    let img = imagesRef.current[index];
+    if (!img || !img.complete) {
+      for (let offset = 1; offset < totalFrames; offset++) {
+        const prev = imagesRef.current[index - offset];
+        if (index - offset >= 0 && prev?.complete) {
+          img = prev;
+          break;
+        }
+        const next = imagesRef.current[index + offset];
+        if (index + offset < totalFrames && next?.complete) {
+          img = next;
+          break;
+        }
+      }
+      if (!img || !img.complete) return;
+    }
 
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
+    if (!canvasWidth || !canvasHeight) return;
+
     const imgWidth = img.naturalWidth || img.width;
     const imgHeight = img.naturalHeight || img.height;
+    if (!imgWidth || !imgHeight) return;
 
     const imgRatio = imgWidth / imgHeight;
     const canvasRatio = canvasWidth / canvasHeight;
@@ -44,11 +71,9 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     let offsetY = 0;
 
     if (canvasRatio > imgRatio) {
-      // Canvas is wider than image aspect ratio
       drawHeight = canvasWidth / imgRatio;
       offsetY = (canvasHeight - drawHeight) / 2;
     } else {
-      // Canvas is taller than image aspect ratio
       drawWidth = canvasHeight * imgRatio;
       offsetX = (canvasWidth - drawWidth) / 2;
     }
@@ -57,31 +82,36 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   };
 
-  // Preload all 120 frames in the background
+  // Preload frames with immediate priority on the first 10 frames
   useEffect(() => {
     let active = true;
-    const loadedImages: HTMLImageElement[] = [];
+    const loadedImages: (HTMLImageElement | null)[] = new Array(totalFrames).fill(null);
 
     const handleImageLoad = (index: number) => {
       if (!active) return;
-      const currentProgress = scrollYProgress.get();
-      const currentFrame = Math.min(totalFrames - 1, Math.floor(currentProgress * totalFrames));
-      if (index === currentFrame) {
+      const currentProgress = smoothProgress.get();
+      const currentFrame = Math.max(0, Math.min(totalFrames - 1, Math.round(currentProgress * (totalFrames - 1))));
+      if (index === currentFrame || lastDrawnFrameRef.current === -1) {
+        lastDrawnFrameRef.current = index;
         drawFrame(index);
       }
     };
 
-    const handleImageError = (index: number, e: string | Event) => {
-      console.error(`Failed to load frame ${index}:`, e);
+    // 1. Immediately load frame 0
+    const frameZero = new Image();
+    frameZero.src = `/sequence/frame_${pad(0)}_delay-0.066s.webp`;
+    frameZero.onload = () => {
+      loadedImages[0] = frameZero;
+      handleImageLoad(0);
     };
+    loadedImages[0] = frameZero;
 
-    for (let i = 0; i < totalFrames; i++) {
+    // 2. Preload remaining frames
+    for (let i = 1; i < totalFrames; i++) {
       const img = new Image();
-      // Match the sequence filenames in /public/sequence
       img.src = `/sequence/frame_${pad(i)}_delay-0.066s.webp`;
       img.onload = () => handleImageLoad(i);
-      img.onerror = (e) => handleImageError(i, e);
-      loadedImages.push(img);
+      loadedImages[i] = img;
     }
 
     imagesRef.current = loadedImages;
@@ -89,7 +119,7 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     return () => {
       active = false;
     };
-  }, [scrollYProgress]);
+  }, [smoothProgress]);
 
   // Set up resize handler and initial canvas rendering
   useEffect(() => {
@@ -98,43 +128,52 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
 
     const handleResize = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2 to preserve GPU performance
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
 
-      // Force drawing of initial scroll position frame
-      const currentProgress = scrollYProgress.get();
-      const frameIndex = Math.min(totalFrames - 1, Math.floor(currentProgress * totalFrames));
+      const currentProgress = smoothProgress.get();
+      const frameIndex = Math.max(0, Math.min(totalFrames - 1, Math.round(currentProgress * (totalFrames - 1))));
       drawFrame(frameIndex);
     };
 
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Initial sizing and draw
+    window.addEventListener("resize", handleResize, { passive: true });
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
-  }, [scrollYProgress]);
+  }, [smoothProgress]);
 
-  // Sync canvas redraw with scroll progress changes
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const frameIndex = Math.min(totalFrames - 1, Math.floor(latest * totalFrames));
+  // Sync canvas redraw with spring-smoothed progress
+  useMotionValueEvent(smoothProgress, "change", (latest) => {
+    // Stop canvas updates completely once scrolled past hero
+    if (latest > 1.02) return;
+
+    const frameIndex = Math.max(0, Math.min(totalFrames - 1, Math.round(latest * (totalFrames - 1))));
     if (frameIndex === lastDrawnFrameRef.current) return;
     lastDrawnFrameRef.current = frameIndex;
-    requestAnimationFrame(() => drawFrame(frameIndex));
+
+    if (rafIdRef.current !== null) {
+      cancelAnimationFrame(rafIdRef.current);
+    }
+    rafIdRef.current = requestAnimationFrame(() => {
+      drawFrame(frameIndex);
+      rafIdRef.current = null;
+    });
   });
 
   return (
-    <div className="sticky top-0 left-0 w-full h-screen overflow-hidden bg-[#0a0a0a]">
-      {/* Cinematic Frame Canvas */}
+    <div className="sticky top-0 left-0 w-full h-screen overflow-hidden bg-transparent z-10 pointer-events-none">
+      {/* Cinematic Transparent Frame Canvas */}
       <canvas
         ref={canvasRef}
-        className="w-full h-full block object-cover"
-        style={{ filter: "brightness(0.85) contrast(1.05)" }}
+        className="w-full h-full block object-cover will-change-transform"
+        style={{ filter: "brightness(0.92) contrast(1.05)" }}
       />
-
-      {/* Subtle overlay gradient to blend nicely with subsequent sections */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent pointer-events-none opacity-80" />
     </div>
   );
 }

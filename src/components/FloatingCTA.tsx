@@ -67,7 +67,7 @@ export default function FloatingCTA() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       removeInteractionListeners();
@@ -169,7 +169,7 @@ export default function FloatingCTA() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center text-xs font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-accent-highlight rounded-full px-6 py-3.5 shadow-[0_8px_30px_rgba(200,245,66,0.3)] hover:bg-[#b5e02c] hover:scale-[1.03] transition-all select-none"
+            className="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center text-xs font-sans font-bold uppercase tracking-wider text-white bg-accent-highlight rounded-full px-6 py-3.5 shadow-[0_8px_30px_rgba(83,79,255,0.4)] hover:bg-accent-hover hover:scale-[1.03] transition-all select-none"
           >
             Hire Me
           </motion.a>

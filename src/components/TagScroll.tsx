@@ -4,14 +4,14 @@ import React from "react";
 
 export default function TagScroll() {
   const trustBadges = [
-    "✦ Full Stack MERN Development",
-    "✦ Real Client Deployments",
-    "✦ AWS Cloud Architecture",
-    "✦ Production-Grade Systems",
-    "✦ Freelance Available",
-    "✦ CI/CD & Docker Pipelines",
-    "✦ Next.js & React Frontend",
-    "✦ JWT Auth & RBAC Systems",
+    "✦ Full Stack MERN & Next.js",
+    "✦ AI Engineering & RAG Pipelines",
+    "✦ MERN & AI Mentor at HACA",
+    "✦ Live Client Platforms (BIG4 & Azura)",
+    "✦ Microservices & Distributed Systems",
+    "✦ AWS EC2, S3 & Docker CI/CD",
+    "✦ MongoDB Atlas & PostgreSQL Prisma",
+    "✦ Open to Relocation",
   ];
 
   // Repeat badges multiple times to ensure a seamless infinite scrolling effect on all viewport sizes

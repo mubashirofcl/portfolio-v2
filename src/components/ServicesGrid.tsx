@@ -20,39 +20,39 @@ interface ServiceItem {
 export default function ServicesGrid() {
   const services: ServiceItem[] = [
     {
-      title: "Full-Stack MERN Architecture",
-      description: "Architecting scalable web applications using React.js frontends and robust Node.js backends. Delivering end-to-end MERN stack solutions.",
+      title: "Full-Stack MERN & Next.js",
+      description: "Architecting high-performance web applications using React.js and Next.js frontends, TanStack Query, Redux Toolkit, and robust Node.js server architectures.",
       icon: <Layers className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Next.js Web Development",
-      description: "Building blazing-fast, SEO-optimized, and highly responsive Next.js websites tailored to elevate your brand and drive business conversions.",
-      icon: <Globe className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
-    },
-    {
-      title: "Custom E-Commerce Platforms",
-      description: "Developing secure e-commerce systems with custom payment gateway integrations, seamless checkout flows, and comprehensive admin dashboards.",
-      icon: <ShoppingCart className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
-    },
-    {
-      title: "REST APIs & Database Design",
-      description: "Designing secure REST APIs and structuring high-performance MongoDB databases to ensure data integrity and seamless cross-platform integration.",
+      title: "AI Engineering & RAG Pipelines",
+      description: "Designing intelligent RAG pipelines with Google Gemini API, Groq (Llama 3.3), MongoDB Atlas Vector Search, and automated ground-truth evaluation labs.",
       icon: <Cpu className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "AWS & Docker Deployment",
-      description: "Deploying applications on reliable cloud infrastructures like AWS using Docker containers for CI/CD pipelines and maximum scalability.",
+      title: "Microservices & Distributed Systems",
+      description: "Building resilient microservices with API gateways, RabbitMQ, event-driven messaging, service discovery, Saga patterns, and circuit breaker fault tolerance.",
+      icon: <Globe className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
+    },
+    {
+      title: "E-Commerce & Monorepo Systems",
+      description: "Full-featured e-commerce platforms with Razorpay payments, COD, wallet engines, Turborepo monorepos, WebSockets, and role-based admin dashboards.",
+      icon: <ShoppingCart className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
+    },
+    {
+      title: "Cloud DevOps & CI/CD Pipelines",
+      description: "Containerized deployments via Docker on AWS EC2, S3 media hosting, CloudFront CDN, Nginx reverse proxies, and automated GitHub Actions CI/CD pipelines.",
       icon: <Cloud className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
     {
-      title: "Technical SEO & Optimization",
-      description: "Optimizing Core Web Vitals, implementing semantic HTML, and improving load times to help your application rank higher on search engines.",
+      title: "Database Architecture & Optimization",
+      description: "Designing normalized schemas in MongoDB and PostgreSQL with Prisma ORM, aggregation pipelines, query indexing, and fixing live production bottlenecks.",
       icon: <Gauge className="w-6 h-6 text-[#f0f0f0] group-hover:text-accent-highlight transition-colors" />,
     },
   ];
 
   return (
-    <section id="services" className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section id="services" className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}

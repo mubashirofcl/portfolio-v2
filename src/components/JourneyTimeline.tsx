@@ -13,29 +13,39 @@ interface ExperienceItem {
 export default function JourneyTimeline() {
   const experiences: ExperienceItem[] = [
     {
-      role: "Full-Stack Developer Trainee",
-      company: "Brototype",
-      duration: "Jan 2024 – Present",
+      role: "MERN Stack Developer & AI Engineering Mentor",
+      company: "HACA, Calicut · Full-Time",
+      duration: "Oct 2026 – Present",
       details: [
-        "Completed a rigorous, hands-on training program focused on modern web development.",
-        "Successfully built and launched multiple complete web applications from scratch.",
-        "Gained deep, practical experience in creating secure logins, managing databases, and hosting websites."
+        "Work in a combined developer and mentor role, spearheading production-grade development alongside engineering mentorship.",
+        "Mentor learners across comprehensive frontend (React, Next.js) and backend (Node.js, Express, MongoDB, PostgreSQL) MERN stack curricula.",
+        "Train engineers in AI engineering concepts, RAG pipeline construction, prompt engineering, and LLM integrations.",
       ],
     },
     {
       role: "Freelance Web Developer & Founder",
-      company: "Orvyn Labs",
+      company: "Orvyn Labs · Self-Founded",
       duration: "Jan 2024 – Present",
       details: [
-        "Founded my own freelance studio to help businesses establish a strong digital presence.",
-        "Successfully delivered live, high-quality projects like the Azura Resorts website.",
-        "Responsible for communicating with clients, designing user interfaces, and ensuring smooth technical delivery."
+        "Run an independent freelance development practice delivering complete digital web solutions from requirements and UI/UX design to cloud infrastructure.",
+        "Delivered and maintain live client production platforms: Azura Resorts (azuraresorts.in) and BIG4 Tiles & Sanitary (big4.co.in).",
+        "Reviewed AI-agent-generated code on BIG4, catching security leaks, database integrity flaws, and deployment risks prior to production release.",
+      ],
+    },
+    {
+      role: "MERN Stack Developer Trainee",
+      company: "Brototype, Calicut",
+      duration: "Jan 2024 – Oct 2026",
+      details: [
+        "Completed rigorous, production-focused training in full-stack architecture, REST API design, middleware architecture, and JWT authentication.",
+        "Architected and shipped end-to-end applications adhering to the Service/Repository pattern and normalized MongoDB schema design with aggregation pipelines.",
+        "Gained hands-on production experience in Docker containerization, AWS EC2/S3 cloud deployments, Nginx reverse proxy, and CI/CD pipelines.",
       ],
     },
   ];
 
   return (
-    <section id="experience" className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section id="experience" className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}

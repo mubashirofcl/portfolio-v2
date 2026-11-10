@@ -12,21 +12,86 @@ interface SkillCategory {
 export default function SkillsStack() {
   const categories: SkillCategory[] = [
     {
-      title: "Frontend",
-      skills: ["React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Redux Toolkit", "HTML5 / CSS3"],
+      title: "Frontend & UI Engineering",
+      skills: [
+        "React.js",
+        "Next.js",
+        "JavaScript (ES6+)",
+        "Redux Toolkit",
+        "TanStack Query",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Glassmorphism UI",
+        "React Lenis",
+      ],
     },
     {
-      title: "Backend & Database",
-      skills: ["Node.js", "Express.js", "MongoDB", "REST APIs", "JWT Auth", "Mongoose ODM"],
+      title: "Backend & Microservices",
+      skills: [
+        "Node.js",
+        "Express.js",
+        "REST API Design",
+        "Microservices Architecture",
+        "RabbitMQ",
+        "API Gateway",
+        "Event-Driven Architecture",
+        "JWT Token Rotation",
+        "Role-Based Access Control",
+        "WebSockets",
+      ],
     },
     {
-      title: "Cloud & DevOps",
-      skills: ["Docker", "AWS EC2 / S3", "CloudFront CDN", "Nginx", "GitHub Actions", "Vercel"],
+      title: "Databases & Vector Search",
+      skills: [
+        "MongoDB Aggregation Pipelines",
+        "Mongoose ODM",
+        "PostgreSQL",
+        "Prisma ORM",
+        "MongoDB Atlas Vector Search",
+        "Database Indexing",
+      ],
+    },
+    {
+      title: "AI / LLM & RAG Pipelines",
+      skills: [
+        "RAG Pipeline Design",
+        "Google Gemini API",
+        "Groq (Llama 3.3)",
+        "Vector Embeddings",
+        "Evaluation Lab & Scoring",
+        "Claude Code & Cursor",
+      ],
+    },
+    {
+      title: "System Design & Architecture",
+      skills: [
+        "High-Level Design (HLD)",
+        "Low-Level Design (LLD)",
+        "Scalability & Load Balancing",
+        "Caching Strategies",
+        "Database Sharding & Replication",
+        "Saga & Circuit Breaker Patterns",
+      ],
+    },
+    {
+      title: "DevOps, Cloud & Tooling",
+      skills: [
+        "Docker",
+        "AWS EC2",
+        "AWS S3",
+        "CloudFront CDN",
+        "Nginx Reverse Proxy",
+        "GitHub Actions (CI/CD)",
+        "Vercel",
+        "Turborepo (pnpm)",
+        "Git & Postman",
+        "Linux",
+      ],
     },
   ];
 
   return (
-    <section id="skills" className="bg-[#0a0a0a] py-[100px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20 overflow-hidden">
+    <section id="skills" className="bg-transparent py-[100px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Split Grid Container */}
@@ -94,7 +159,8 @@ export default function SkillsStack() {
                 maxVerticalRotationDeg={0}
                 segments={34}
                 dragDampening={2}
-                grayscale={true}
+                grayscale={false}
+                grayscaleOnHover={true}
                 overlayBlurColor="#0a0a0a"
                 imageBorderRadius="24px"
                 openedImageBorderRadius="24px"

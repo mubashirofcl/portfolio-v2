@@ -58,7 +58,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section id="contact" className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
@@ -135,7 +135,7 @@ export default function ContactForm() {
                     Location
                   </span>
                   <span className="text-xs sm:text-sm font-sans font-semibold text-[#f0f0f0]">
-                    Wayanad, Kerala, India
+                    Wayanad, Kerala (Open to Relocation)
                   </span>
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2 text-xs font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#e8e8e8] border border-[#e8e8e8] rounded-xl py-4 transition-all duration-300 hover:bg-accent-highlight hover:border-accent-highlight hover:text-[#0a0a0a] disabled:opacity-50 select-none cursor-pointer shadow-[0_4px_14px_rgba(255,255,255,0.05)] hover:shadow-[0_4px_14px_rgba(200,245,66,0.15)]"
+                  className="w-full inline-flex items-center justify-center gap-2 text-xs font-sans font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#e8e8e8] border border-[#e8e8e8] rounded-xl py-4 transition-all duration-300 hover:bg-accent-highlight hover:border-accent-highlight hover:text-white disabled:opacity-50 select-none cursor-pointer shadow-[0_4px_14px_rgba(255,255,255,0.05)] hover:shadow-[0_4px_14px_rgba(83,79,255,0.3)]"
                 >
                   {isSubmitting ? (
                     "Sending Message..."

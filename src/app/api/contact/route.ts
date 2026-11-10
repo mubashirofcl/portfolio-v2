@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       text: `Hi Mubashir,\n\nYou have received a new project inquiry from your portfolio website:\n\nName: ${name}\nEmail: ${email}\nProject Type: ${projectType}\nEstimated Budget: ${budget}\n\nMessage:\n${message}\n\nBest regards,\nPortfolio System`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background-color: #ffffff; color: #333333;">
-          <h2 style="color: #000000; background: #c8f542; padding: 15px; margin-top: 0; border-radius: 5px; text-align: center; font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">New Project Inquiry</h2>
+          <h2 style="color: #ffffff; background: #534fff; padding: 15px; margin-top: 0; border-radius: 5px; text-align: center; font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">New Project Inquiry</h2>
           <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
           <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #0066cc; text-decoration: none;">${email}</a></p>
           <p style="margin: 10px 0;"><strong>Project Type:</strong> ${projectType}</p>

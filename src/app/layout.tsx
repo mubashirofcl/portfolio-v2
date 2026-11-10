@@ -17,54 +17,55 @@ const bebasNeue = Bebas_Neue({
 export const metadata: Metadata = {
   metadataBase: new URL('https://mubashiir.in'),
   title: {
-    default: 'Mubashir Palapadiyan — MERN Stack Developer | Kerala',
-    template: '%s | Mubashir Palapadiyan',
+    default: 'Mubashir PP — Full Stack Developer & AI Engineering Mentor | Kerala',
+    template: '%s | Mubashir PP',
   },
   description:
-    'Freelance MERN Stack Developer in Kerala, India. Specializing in architecting scalable full-stack web applications with React, Next.js, Node.js, MongoDB, AWS, and Docker. Founder of Orvyn Labs.',
+    'Mubashir PP is a Full-Stack MERN Developer and AI Engineering Mentor at HACA, Calicut, and founder of Orvyn Labs. Production experience in React, Next.js, Node.js, PostgreSQL, Docker, AWS, and RAG pipelines.',
   icons: {
     icon: '/icon.png',
     shortcut: '/icon.png',
     apple: '/icon.png',
   },
   keywords: [
-    'Mubashir Palapadiyan',
     'Mubashir PP',
-    'Mubashir MERN Developer',
-    'MERN Stack Developer Kerala',
-    'Full Stack Developer Wayanad',
-    'Next.js Developer India',
-    'React Developer Kerala',
-    'AWS Developer Kerala',
-    'mubashiir.in',
+    'Mubashir Palapadiyan',
+    'Full Stack Developer Kerala',
+    'MERN Stack Developer',
+    'AI Engineering Mentor',
+    'HACA Calicut',
+    'Backend Developer Node.js',
+    'Frontend Developer Next.js',
+    'Wayanad Kerala Developer',
     'Orvyn Labs',
+    'mubashiir.in',
   ],
-  authors: [{ name: 'Mubashir Palapadiyan', url: 'https://mubashiir.in' }],
-  creator: 'Mubashir Palapadiyan',
+  authors: [{ name: 'Mubashir PP', url: 'https://mubashiir.in' }],
+  creator: 'Mubashir PP',
   alternates: {
     canonical: 'https://mubashiir.in',
   },
   openGraph: {
     type: 'website',
     url: 'https://mubashiir.in',
-    siteName: 'Mubashir Palapadiyan — Portfolio',
-    title: 'Mubashir Palapadiyan — MERN Stack Developer',
+    siteName: 'Mubashir PP — Portfolio',
+    title: 'Mubashir PP — Full Stack Developer & AI Engineering Mentor',
     description:
-      'Full-stack engineer from Kerala specialising in React, Node.js, MongoDB, and cloud deployments. Founder of Orvyn Labs.',
+      'Full-stack engineer and AI mentor from Kerala. Specializing in React, Next.js, Node.js, PostgreSQL, Docker, AWS EC2, and RAG pipelines.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Mubashir Palapadiyan — MERN Stack Developer Portfolio',
+        alt: 'Mubashir PP — Full Stack Developer Portfolio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mubashir Palapadiyan — MERN Stack Developer',
+    title: 'Mubashir PP — Full Stack Developer & AI Engineering Mentor',
     description:
-      'Full-stack engineer from Kerala. React, Node.js, MongoDB, AWS, Docker.',
+      'Full-stack engineer & AI mentor from Kerala. React, Next.js, Node.js, PostgreSQL, AWS, Docker, RAG pipelines.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -85,14 +86,20 @@ const personSchema = {
   alternateName: ['Mubashir PP', 'Mubashir Palapadiyan Developer'],
   url: 'https://mubashiir.in',
   image: 'https://mubashiir.in/photo.jpg',
-  jobTitle: 'MERN Stack Developer',
+  jobTitle: 'Full-Stack MERN Developer & AI Engineering Mentor',
   description:
-    'Full-stack developer from Wayanad, Kerala, specialising in React, Next.js, Node.js, MongoDB, Docker, and AWS deployments.',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Orvyn Labs',
-    url: 'https://mubashiir.in',
-  },
+    'Full-stack developer and AI engineering mentor from Wayanad, Kerala (open to relocation), specialising in React, Next.js, Node.js, PostgreSQL, MongoDB, Docker, AWS deployments, and RAG pipelines.',
+  worksFor: [
+    {
+      '@type': 'Organization',
+      name: 'HACA',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Orvyn Labs',
+      url: 'https://mubashiir.in',
+    },
+  ],
   alumniOf: [
     {
       '@type': 'EducationalOrganization',
@@ -115,9 +122,11 @@ const personSchema = {
   ],
   knowsAbout: [
     'React.js', 'Next.js', 'Node.js', 'MongoDB',
-    'Express.js', 'Docker', 'AWS EC2', 'AWS S3',
-    'Tailwind CSS', 'JWT Authentication', 'REST API',
-    'Full Stack Development', 'MERN Stack',
+    'Express.js', 'PostgreSQL', 'Prisma ORM', 'Docker',
+    'AWS EC2', 'AWS S3', 'CloudFront CDN', 'Tailwind CSS',
+    'JWT Authentication', 'REST API', 'Microservices',
+    'RAG Pipelines', 'Google Gemini API', 'Groq Llama 3.3',
+    'Vector Search', 'Full Stack Development', 'MERN Stack',
   ],
   email: 'mubashirppofcl@gmail.com',
   telephone: '+919072190088',
@@ -157,7 +166,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`${sora.variable} ${bebasNeue.variable} font-sans bg-[#0a0a0a] text-white antialiased`}
       >

@@ -20,9 +20,9 @@ const config: Config = {
         },
         accent: {
           DEFAULT: "#e8e8e8",
-          highlight: "#c8f542",
-          muted: "rgba(232, 232, 232, 0.1)",
-          hover: "#cccccc",
+          highlight: "#534fff",
+          muted: "rgba(83, 79, 255, 0.15)",
+          hover: "#4338ca",
         },
         body: "#888888",
         heading: "#f0f0f0",

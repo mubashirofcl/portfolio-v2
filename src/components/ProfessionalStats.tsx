@@ -10,14 +10,14 @@ interface StatItem {
 
 export default function ProfessionalStats() {
   const stats: StatItem[] = [
-    { number: "3+", label: "Full Stack Projects" },
-    { number: "10+", label: "Technologies" },
-    { number: "1", label: "Live Client Deployment" },
-    { number: "AWS", label: "Production Systems" },
+    { number: "5+", label: "Full-Stack & AI Systems" },
+    { number: "2", label: "Live Client Platforms" },
+    { number: "25+", label: "Technologies & Cloud Tools" },
+    { number: "HACA", label: "MERN & AI Engineering Mentor" },
   ];
 
   return (
-    <section className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {stats.map((stat, idx) => (

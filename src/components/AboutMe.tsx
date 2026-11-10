@@ -3,13 +3,19 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, GraduationCap, Code2, Briefcase, Building2, Globe } from "lucide-react";
+import LinkPreview from "./LinkPreview";
 
 export default function AboutMe() {
   const infoCards = [
     { 
       label: "Location", 
-      value: "Wayanad, Kerala", 
+      value: "Wayanad, Kerala (Relocation Open)", 
       icon: <MapPin className="w-4 h-4 text-accent-highlight" /> 
+    },
+    { 
+      label: "Current Role", 
+      value: "MERN & AI Mentor at HACA", 
+      icon: <Briefcase className="w-4 h-4 text-accent-highlight" /> 
     },
     { 
       label: "Degree", 
@@ -17,24 +23,19 @@ export default function AboutMe() {
       icon: <GraduationCap className="w-4 h-4 text-accent-highlight" /> 
     },
     { 
-      label: "Focus", 
-      value: "Full Stack MERN", 
-      icon: <Code2 className="w-4 h-4 text-accent-highlight" /> 
-    },
-    { 
-      label: "Freelance", 
-      value: "Available", 
-      icon: <Briefcase className="w-4 h-4 text-accent-highlight" /> 
-    },
-    { 
       label: "Studio", 
-      value: "Orvyn Labs", 
+      value: "Orvyn Labs (Founder)", 
       icon: <Building2 className="w-4 h-4 text-accent-highlight" /> 
     },
     { 
-      label: "Portfolio", 
-      value: "mubashiir.in", 
+      label: "Live Platforms", 
+      value: "BIG4 & Azura Resorts", 
       icon: <Globe className="w-4 h-4 text-accent-highlight" /> 
+    },
+    { 
+      label: "Core Focus", 
+      value: "Full Stack MERN & AI Systems", 
+      icon: <Code2 className="w-4 h-4 text-accent-highlight" /> 
     },
   ];
 
@@ -45,7 +46,7 @@ export default function AboutMe() {
   ];
 
   return (
-    <section id="about" className="bg-[#0a0a0a] py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
+    <section id="about" className="bg-transparent py-[120px] px-6 sm:px-12 lg:px-24 border-b border-[#1f1f1f] relative z-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Title */}
@@ -69,19 +70,38 @@ export default function AboutMe() {
             className="lg:col-span-7 flex flex-col gap-6 text-sm sm:text-base text-[#888888] font-sans font-normal leading-relaxed text-left"
           >
             <p className="text-[#f0f0f0] font-medium text-base sm:text-lg">
-              Hi, I&apos;m Mubashir Palapadiyan! I&apos;m a Full Stack MERN Developer based in Wayanad, Kerala, specializing in architecting scalable React.js frontends and robust Node.js backends.
+              Hi, I&apos;m Mubashir PP! I&apos;m a Full Stack MERN Developer and AI Engineering Mentor at HACA, Calicut, and the founder of Orvyn Labs, based in Wayanad, Kerala (open to relocation).
             </p>
             <p>
-              Through my studio, Orvyn Labs, I partner with businesses to build high-performance web applications. From designing intuitive user interfaces to deploying complex MongoDB databases on AWS, I handle the complete end-to-end development lifecycle.
+              I specialize in architecting production-grade server-side systems, responsive Next.js and React frontends, and intelligent AI pipelines. My technical background spans Node.js, Express.js, MongoDB and PostgreSQL schema design, microservices patterns, Docker containerization, and AWS cloud deployments with automated CI/CD.
             </p>
             <p>
-              Whether you need a custom e-commerce platform, a Next.js corporate website, or a secure REST API, my focus is on writing clean, maintainable code that drives real business growth and provides an exceptional user experience.
+              Through Orvyn Labs, I build and maintain live client platforms including BIG4 Tiles &amp; Sanitary (big4.co.in) and Azura Resorts (azuraresorts.in). I actively engineer RAG pipelines with the Google Gemini API, Groq (Llama 3.3), and vector search, while guiding the next generation of engineers in MERN stack and AI engineering at HACA.
             </p>
             
             <div className="mt-2">
-              <a href="/about" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-accent-highlight hover:text-[#f0f0f0] transition-colors">
-                Read my full developer journey →
-              </a>
+              <LinkPreview
+                title="Read my full developer journey →"
+                link="/about"
+                customImage={{
+                  src: "/photo.jpg",
+                  alt: "Mubashir Palapadiyan — Biography",
+                }}
+                previewWidth={280}
+                previewHeight={160}
+                radius={14}
+                placement="top"
+                align="left"
+                textColor="#534fff"
+                underlineColor="rgba(83, 79, 255, 0.4)"
+                font={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  fontFamily: "var(--font-sora), sans-serif",
+                }}
+              />
             </div>
 
             {/* Social Links Row */}

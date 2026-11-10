@@ -9,16 +9,16 @@ import type { Metadata } from "next";
 import AboutContent from "./AboutContent";
 
 export const metadata: Metadata = {
-  title: 'About Mubashir Palapadiyan',
+  title: 'About Mubashir Palapadiyan — Full-Stack Developer & AI Mentor',
   description:
-    'Learn about Mubashir Palapadiyan, a MERN Stack Developer from Wayanad, Kerala. Background, education, skills, and the story behind Orvyn Labs.',
+    'Learn about Mubashir Palapadiyan (Mubashir PP), a Full-Stack MERN Developer and AI Engineering Mentor at HACA, Calicut, and founder of Orvyn Labs. Architecture background, education, live client platforms, and skills.',
   alternates: {
     canonical: 'https://mubashiir.in/about',
   },
   openGraph: {
-    title: 'About Mubashir Palapadiyan — MERN Stack Developer',
+    title: 'About Mubashir Palapadiyan — Full-Stack Developer & AI Engineering Mentor',
     description:
-      'MERN Stack Developer from Wayanad, Kerala. BCA graduate, Brototype-trained, founder of Orvyn Labs.',
+      'Full-Stack Developer & AI Mentor at HACA, founder of Orvyn Labs. Production experience in React, Next.js, Node.js, PostgreSQL, Docker, AWS, and RAG pipelines.',
     url: 'https://mubashiir.in/about',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
@@ -31,14 +31,20 @@ const aboutPersonSchema = {
   alternateName: ['Mubashir PP', 'Mubashir Palapadiyan Developer'],
   url: 'https://mubashiir.in/about',
   image: 'https://mubashiir.in/photo.jpg',
-  jobTitle: 'MERN Stack Developer',
+  jobTitle: 'Full-Stack MERN Developer & AI Engineering Mentor',
   description:
-    'Full-stack developer from Wayanad, Kerala, specialising in React, Next.js, Node.js, MongoDB, Docker, and AWS deployments.',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Orvyn Labs',
-    url: 'https://mubashiir.in',
-  },
+    'Full-stack developer and AI engineering mentor from Wayanad, Kerala (open to relocation), specialising in React, Next.js, Node.js, PostgreSQL, MongoDB, Docker, AWS deployments, and RAG pipelines.',
+  worksFor: [
+    {
+      '@type': 'Organization',
+      name: 'HACA',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Orvyn Labs',
+      url: 'https://mubashiir.in',
+    },
+  ],
   alumniOf: [
     {
       '@type': 'EducationalOrganization',
@@ -61,9 +67,11 @@ const aboutPersonSchema = {
   ],
   knowsAbout: [
     'React.js', 'Next.js', 'Node.js', 'MongoDB',
-    'Express.js', 'Docker', 'AWS EC2', 'AWS S3',
-    'Tailwind CSS', 'JWT Authentication', 'REST API',
-    'Full Stack Development', 'MERN Stack',
+    'Express.js', 'PostgreSQL', 'Prisma ORM', 'Docker',
+    'AWS EC2', 'AWS S3', 'CloudFront CDN', 'Tailwind CSS',
+    'JWT Authentication', 'REST API', 'Microservices',
+    'RAG Pipelines', 'Google Gemini API', 'Groq Llama 3.3',
+    'Vector Search', 'Full Stack Development', 'MERN Stack',
   ],
   email: 'mubashirppofcl@gmail.com',
   telephone: '+919072190088',

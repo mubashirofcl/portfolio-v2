@@ -104,8 +104,8 @@ main.sphere-main {
 }
 
 .item__image:hover {
-  border-color: rgba(200, 245, 66, 0.4);
-  box-shadow: 0 0 15px rgba(200, 245, 66, 0.15);
+  border-color: rgba(83, 79, 255, 0.5);
+  box-shadow: 0 0 15px rgba(83, 79, 255, 0.25);
 }
 
 .item__image:focus {
@@ -119,11 +119,11 @@ main.sphere-main {
   pointer-events: none;
   backface-visibility: hidden;
   filter: var(--image-filter, none);
-  transition: filter 0.3s ease;
+  transition: filter 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .item__image:hover img {
-  filter: none !important;
+  filter: var(--image-hover-filter, grayscale(1)) !important;
 }
 
 .viewer {

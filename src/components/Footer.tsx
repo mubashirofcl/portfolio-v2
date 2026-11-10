@@ -51,17 +51,24 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#0a0a0a] border-t border-[#1f1f1f] pt-16 pb-8 px-6 sm:px-12 lg:px-24 select-none relative z-20">
+    <footer className="bg-transparent border-t border-[#1f1f1f] pt-16 pb-8 px-6 sm:px-12 lg:px-24 select-none relative z-20">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
         
-        {/* LEFT COLUMN: Identity info */}
-        <div className="flex flex-col text-left">
-          <span className="text-lg font-sans font-bold text-[#f0f0f0] tracking-wide select-all">
-            Mubashir PP
-          </span>
-          <span className="text-xs font-sans text-[#888888] tracking-wide mt-1 select-all">
-            Full Stack MERN Developer
-          </span>
+        {/* LEFT COLUMN: Identity info with Brand Logo */}
+        <div className="flex items-center gap-4 text-left">
+          <img
+            src="/hero_logo.png"
+            alt="Mubashir Monogram"
+            className="w-10 h-10 sm:w-12 sm:h-12 object-contain filter drop-shadow-[0_0_16px_rgba(83,79,255,0.3)] hover:scale-105 transition-transform duration-300"
+          />
+          <div className="flex flex-col">
+            <span className="text-lg font-sans font-bold text-[#f0f0f0] tracking-wide select-all">
+              Mubashir PP
+            </span>
+            <span className="text-xs font-sans text-[#888888] tracking-wide mt-0.5 select-all">
+              Full-Stack Developer &bull; AI Engineering Mentor &bull; Orvyn Labs
+            </span>
+          </div>
         </div>
 
         {/* CENTER COLUMN: Quick Links */}
