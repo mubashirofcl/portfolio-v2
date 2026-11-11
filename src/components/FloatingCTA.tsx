@@ -1,62 +1,250 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
+import VenomButton from "./VenomButton";
 
-export default function FloatingCTA() {
+interface FloatingCTAProps {
+  loaderDone?: boolean;
+}
+
+const TARGET_VOLUME = 0.25;
+const FADE_IN_MS = 700;
+const INTERACTION_EVENTS = [
+  "pointerdown",
+  "pointerup",
+  "mousedown",
+  "mouseup",
+  "touchstart",
+  "touchend",
+  "click",
+  "keydown",
+] as const;
+
+export default function FloatingCTA({ loaderDone = true }: FloatingCTAProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [awaitingGesture, setAwaitingGesture] = useState(false);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const musicBtnRef = useRef<HTMLButtonElement | null>(null);
+  const loaderDoneRef = useRef(loaderDone);
   const hasManuallyPausedRef = useRef(false);
+  const isUnlockingRef = useRef(false);
+  const isAudioUnlockedRef = useRef(false);
+  const isAttemptInFlightRef = useRef(false);
+  const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Position settings:
-  // Height of Hire Me button is ~42px. Bottom spacing is 24px (bottom-6).
-  // When Hire Me is visible, the music button slides up to bottom-[78px] (78px = 24px + 42px + 12px gap)
-  const musicButtonBottom = isVisible ? "78px" : "24px";
+  // Height of Venom HIRE ME button is 44px. Bottom spacing is 24px (bottom-6).
+  // When HIRE ME is visible, the music button slides up to bottom-[80px] (80px = 24px + 44px + 12px gap)
+  const musicButtonBottom = isVisible ? "80px" : "24px";
+
+  const cancelFade = useCallback(() => {
+    if (fadeIntervalRef.current !== null) {
+      clearInterval(fadeIntervalRef.current);
+      fadeIntervalRef.current = null;
+    }
+  }, []);
+
+  const fadeInVolume = useCallback(
+    (audio: HTMLAudioElement, target = TARGET_VOLUME, durationMs = FADE_IN_MS) => {
+      cancelFade();
+      const startVol = 0.02;
+      audio.volume = startVol;
+      const startTime = Date.now();
+
+      fadeIntervalRef.current = setInterval(() => {
+        if (audio.paused) {
+          cancelFade();
+          return;
+        }
+        const elapsed = Math.max(0, Date.now() - startTime);
+        const progress = Math.min(1, elapsed / durationMs);
+        // Smooth ease-out curve for volume fade-in
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const nextVol = Math.max(0, Math.min(1, startVol + (target - startVol) * eased));
+        audio.volume = nextVol;
+
+        if (progress >= 1) {
+          audio.volume = target;
+          cancelFade();
+        }
+      }, 25);
+    },
+    [cancelFade]
+  );
+
+  const attemptPlayAfterLoaderRef = useRef<() => void>(() => {});
 
   useEffect(() => {
-    // 1. Initialize audio element on mount for SSR compliance
-    const audio = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/VAX%20-%20Fireproof%20Feat%20Teddy%20Sky.mp3");
+    // 1. Initialize local preloaded audio element on mount for zero-latency playback
+    const audio = new Audio("/audio/bg-music.mp3");
     audio.loop = true;
-    audio.volume = 0.25; // Subtle ambient volume
+    audio.preload = "auto";
+    audio.volume = TARGET_VOLUME;
+    audio.load();
     audioRef.current = audio;
 
-    // 2. Playback activation mechanism
-    const attemptPlay = () => {
-      if (hasManuallyPausedRef.current) return;
-      audio.play()
-        .then(() => {
-          setIsPlaying(true);
-          removeInteractionListeners();
-        })
-        .catch(() => {
-          // Keep waiting for user interactions if browser blocks autoplay
-        });
-    };
+    let listenersActive = false;
 
-    const handleInteraction = () => {
-      attemptPlay();
+    const removeInteractionListeners = () => {
+      if (!listenersActive) return;
+      listenersActive = false;
+      INTERACTION_EVENTS.forEach((evt) => {
+        window.removeEventListener(evt, handleUserInteraction, true);
+      });
     };
 
     const addInteractionListeners = () => {
-      window.addEventListener("click", handleInteraction, { once: true });
-      window.addEventListener("scroll", handleInteraction, { once: true });
-      window.addEventListener("touchstart", handleInteraction, { once: true });
-      window.addEventListener("keydown", handleInteraction, { once: true });
+      if (listenersActive) return;
+      listenersActive = true;
+      INTERACTION_EVENTS.forEach((evt) => {
+        window.addEventListener(evt, handleUserInteraction, {
+          capture: true,
+          passive: true,
+        });
+      });
     };
 
-    const removeInteractionListeners = () => {
-      window.removeEventListener("click", handleInteraction);
-      window.removeEventListener("scroll", handleInteraction);
-      window.removeEventListener("touchstart", handleInteraction);
-      window.removeEventListener("keydown", handleInteraction);
+    const syncPlaying = () => {
+      if (!isUnlockingRef.current) {
+        setIsPlaying(true);
+        setAwaitingGesture(false);
+      }
     };
 
-    // Attempt direct play
-    attemptPlay();
+    const syncPaused = () => {
+      if (!isUnlockingRef.current) {
+        setIsPlaying(false);
+      }
+    };
 
-    // Set up listeners for the first user interaction to bypass autoplay blocks
+    audio.addEventListener("play", syncPlaying);
+    audio.addEventListener("playing", syncPlaying);
+    audio.addEventListener("pause", syncPaused);
+    audio.addEventListener("ended", syncPaused);
+
+    const attemptPlayAfterLoader = () => {
+      if (!loaderDoneRef.current || hasManuallyPausedRef.current) return;
+
+      if (!audio.paused) {
+        audio.muted = false;
+        setIsPlaying(true);
+        setAwaitingGesture(false);
+        removeInteractionListeners();
+        return;
+      }
+
+      if (isAttemptInFlightRef.current) return;
+      isAttemptInFlightRef.current = true;
+      isUnlockingRef.current = false;
+      audio.muted = false;
+      audio.volume = 0.02;
+
+      audio
+        .play()
+        .then(() => {
+          isAttemptInFlightRef.current = false;
+          if (hasManuallyPausedRef.current) {
+            audio.pause();
+            return;
+          }
+          setIsPlaying(true);
+          setAwaitingGesture(false);
+          fadeInVolume(audio, TARGET_VOLUME, FADE_IN_MS);
+          removeInteractionListeners();
+        })
+        .catch(() => {
+          isAttemptInFlightRef.current = false;
+          audio.volume = TARGET_VOLUME;
+          if (loaderDoneRef.current && !hasManuallyPausedRef.current) {
+            setAwaitingGesture(true);
+          }
+          // Keep capture listeners armed until a qualifying user activation resolves play()
+          addInteractionListeners();
+        });
+    };
+
+    attemptPlayAfterLoaderRef.current = attemptPlayAfterLoader;
+
+    // Silently unlock audio element if user taps/clicks while Masthead loader is visible
+    const unlockDuringLoader = () => {
+      if (
+        loaderDoneRef.current ||
+        hasManuallyPausedRef.current ||
+        isAudioUnlockedRef.current ||
+        isUnlockingRef.current ||
+        isAttemptInFlightRef.current ||
+        !audio.paused
+      ) {
+        return;
+      }
+
+      isUnlockingRef.current = true;
+      audio.muted = true;
+
+      audio
+        .play()
+        .then(() => {
+          isAudioUnlockedRef.current = true;
+          if (!loaderDoneRef.current) {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.muted = false;
+            isUnlockingRef.current = false;
+          } else {
+            // Loader finished right as silent unlock resolved: transition directly to audible playback
+            isUnlockingRef.current = false;
+            audio.muted = false;
+            if (!hasManuallyPausedRef.current) {
+              setIsPlaying(true);
+              setAwaitingGesture(false);
+              fadeInVolume(audio, TARGET_VOLUME, FADE_IN_MS);
+              removeInteractionListeners();
+            } else {
+              audio.pause();
+            }
+          }
+        })
+        .catch(() => {
+          audio.muted = false;
+          isUnlockingRef.current = false;
+        });
+    };
+
+    function handleUserInteraction(e: Event) {
+      if (hasManuallyPausedRef.current) return;
+
+      // Let toggleMusic handle clicks on the FloatingCTA music button itself
+      if (
+        musicBtnRef.current &&
+        e.target instanceof Node &&
+        musicBtnRef.current.contains(e.target)
+      ) {
+        return;
+      }
+
+      if (!loaderDoneRef.current) {
+        unlockDuringLoader();
+      } else {
+        attemptPlayAfterLoader();
+      }
+    }
+
+    const handleMastheadComplete = () => {
+      loaderDoneRef.current = true;
+      attemptPlayAfterLoader();
+    };
+
+    // Arm capture listeners immediately so early gestures unlock and post-loader gestures start playback
     addInteractionListeners();
+    window.addEventListener("masthead:complete", handleMastheadComplete);
+
+    // If component mounts when loader is already complete (e.g., pages without loader), attempt play right away
+    if (loaderDoneRef.current) {
+      attemptPlayAfterLoader();
+    }
 
     // Scroll listener for the "Hire Me" button visibility
     const handleScroll = () => {
@@ -68,28 +256,58 @@ export default function FloatingCTA() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
+      cancelFade();
       removeInteractionListeners();
+      window.removeEventListener("masthead:complete", handleMastheadComplete);
       window.removeEventListener("scroll", handleScroll);
+      audio.removeEventListener("play", syncPlaying);
+      audio.removeEventListener("playing", syncPlaying);
+      audio.removeEventListener("pause", syncPaused);
+      audio.removeEventListener("ended", syncPaused);
       audio.pause();
+      audio.src = "";
+      audioRef.current = null;
+      isAudioUnlockedRef.current = false;
+      isUnlockingRef.current = false;
+      isAttemptInFlightRef.current = false;
     };
-  }, []);
+  }, [cancelFade, fadeInVolume]);
+
+  // Trigger autoplay as soon as React state notifies loader completion
+  useEffect(() => {
+    loaderDoneRef.current = loaderDone;
+    if (loaderDone) {
+      attemptPlayAfterLoaderRef.current();
+    }
+  }, [loaderDone]);
 
   const toggleMusic = () => {
-    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
+    if (isPlaying || !audio.paused) {
       hasManuallyPausedRef.current = true;
+      cancelFade();
+      audio.pause();
+      setIsPlaying(false);
+      setAwaitingGesture(false);
     } else {
       hasManuallyPausedRef.current = false;
-      audioRef.current.play()
+      isUnlockingRef.current = false;
+      audio.muted = false;
+      audio.volume = 0.02;
+      audio
+        .play()
         .then(() => {
           setIsPlaying(true);
+          setAwaitingGesture(false);
+          fadeInVolume(audio, TARGET_VOLUME, 450);
         })
         .catch((err) => {
+          audio.volume = TARGET_VOLUME;
           console.error("Audio playback failed:", err);
         });
     }
@@ -123,10 +341,15 @@ export default function FloatingCTA() {
     <>
       {/* Background Music Control Button */}
       <motion.button
+        ref={musicBtnRef}
         onClick={toggleMusic}
         animate={{ bottom: musicButtonBottom }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        className="fixed right-7 z-50 w-[100px] h-[40px] rounded-full bg-[#111111]/90 backdrop-blur-md border border-[#1f1f1f] text-accent-highlight hover:border-accent-highlight/40 flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.7)] hover:scale-[1.03] transition-all select-none cursor-pointer"
+        className={`fixed right-[26px] z-50 w-[100px] h-[40px] rounded-full bg-[#111111]/90 backdrop-blur-md border text-accent-highlight hover:border-accent-highlight/40 flex items-center justify-center hover:scale-[1.03] transition-all select-none cursor-pointer ${
+          awaitingGesture && !isPlaying
+            ? "border-accent-highlight/50 shadow-[0_0_24px_rgba(83,79,255,0.28)]"
+            : "border-[#1f1f1f] shadow-[0_8px_30px_rgba(0,0,0,0.7)]"
+        }`}
         title={isPlaying ? "Mute Background Music" : "Play Background Music"}
         aria-label={isPlaying ? "Mute Background Music" : "Play Background Music"}
       >
@@ -159,22 +382,34 @@ export default function FloatingCTA() {
         </div>
       </motion.button>
 
-      {/* Floating Hire Me Button */}
-      <AnimatePresence>
-        {isVisible && (
-          <motion.a
-            href="#contact"
-            onClick={handleHireClick}
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center text-xs font-sans font-bold uppercase tracking-wider text-white bg-accent-highlight rounded-full px-6 py-3.5 shadow-[0_8px_30px_rgba(83,79,255,0.4)] hover:bg-accent-hover hover:scale-[1.03] transition-all select-none"
-          >
-            Hire Me
-          </motion.a>
-        )}
-      </AnimatePresence>
+      {/* Floating Venom Hire Me Button */}
+      <VenomButton
+        label="HIRE ME"
+        gooColor="#120883"
+        textColor="#FFFFFF"
+        size={44}
+        cursor="native"
+        autoplay={false}
+        active={isVisible}
+        onClick={handleHireClick}
+        style={{
+          position: "fixed",
+          bottom: 0,
+          right: 0,
+          width: "min(440px, 100vw)",
+          height: "min(380px, 100vh)",
+          zIndex: 45,
+          pointerEvents: "none",
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? "translateY(0px)" : "translateY(14px)",
+          transition: "opacity 280ms ease, transform 280ms ease",
+        }}
+        buttonStyle={{
+          position: "absolute",
+          bottom: 24,
+          right: 24,
+        }}
+      />
     </>
   );
 }

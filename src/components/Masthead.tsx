@@ -301,6 +301,9 @@ function __OriginkitBase_Masthead(props: Props) {
 
     const handleComplete = () => {
         document.body.style.overflow = ""
+        if (typeof window !== "undefined") {
+            window.dispatchEvent(new CustomEvent("masthead:complete"))
+        }
         if (props.onComplete) props.onComplete()
     }
 
@@ -427,7 +430,7 @@ const __originkitPresetProps = {
   "minTime": 2.2,
 };
 
-export default function Masthead(props: Record<string, unknown>) {
-  return <__OriginkitBase_Masthead {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
+export default function Masthead(props: Partial<Props> & Record<string, unknown>) {
+  return <__OriginkitBase_Masthead {...(__originkitPresetProps as Partial<Props>)} {...props} />;
 }
 

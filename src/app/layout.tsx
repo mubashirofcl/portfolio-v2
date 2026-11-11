@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import ElectricCursor from "@/components/ElectricCursor";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -176,6 +177,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify([personSchema, websiteSchema, professionalServiceSchema]) }}
         />
         {children}
+        <ElectricCursor
+          style={{
+            position: "fixed",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 99990,
+            pointerEvents: "none",
+          }}
+        />
       </body>
     </html>
   );

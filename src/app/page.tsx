@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import ScrollyCanvas from "@/components/ScrollyCanvas";
 import Overlay from "@/components/Overlay";
 import TagScroll from "@/components/TagScroll";
@@ -23,11 +23,16 @@ import Masthead from "@/components/Masthead";
 export default function Home() {
   // Shared ref controlling the canvas frames and overlays simultaneously
   const heroRef = useRef<HTMLDivElement>(null);
+  const [loaderDone, setLoaderDone] = useState(false);
+
+  const handleLoaderComplete = useCallback(() => {
+    setLoaderDone(true);
+  }, []);
 
   return (
     <main className="bg-[#0a0a0a] min-h-screen text-white relative">
       {/* Editorial Masthead Reveal Preloader */}
-      <Masthead />
+      <Masthead onComplete={handleLoaderComplete} />
 
       {/* Hero Scroll System: 500vh scroll space */}
       <div ref={heroRef} className="relative z-10" style={{ height: "500vh" }}>
@@ -75,7 +80,7 @@ export default function Home() {
       <Footer />
 
       {/* Sticky viewport floating CTA */}
-      <FloatingCTA />
+      <FloatingCTA loaderDone={loaderDone} />
 
       {/* Halftone Bloom interactive halftone ribbons background */}
       <HalftoneBloom />
