@@ -3,6 +3,7 @@
 import React from "react";
 import { useScroll, useSpring, useTransform, motion } from "framer-motion";
 import LinkPreview from "./LinkPreview";
+import MeshText from "./MeshText";
 
 interface OverlayProps {
   heroRef: React.RefObject<HTMLDivElement>;
@@ -86,13 +87,20 @@ export default function Overlay({ heroRef }: OverlayProps) {
       >
         <div
           aria-hidden="true"
-          className="text-white/20 sm:text-white/10 tracking-tighter uppercase whitespace-nowrap leading-none select-none"
-          style={{
-            fontSize: "clamp(3rem, 17vw, 14rem)",
-            fontWeight: 900,
-          }}
+          className="w-full max-w-7xl h-[clamp(4.5rem,22vw,17rem)] flex items-center justify-center opacity-20 sm:opacity-10 select-none"
         >
-          MUBASHIR.
+          <MeshText
+            text="MUBASHIR."
+            color="#FFFFFF"
+            font={{
+              fontFamily: 'var(--font-sora), "Sora", sans-serif',
+              fontWeight: 900,
+              fontSize: "clamp(3rem, 17vw, 14rem)",
+              letterSpacing: "-0.05em",
+            }}
+            force={18}
+            colorSplit={true}
+          />
         </div>
       </motion.div>
 
