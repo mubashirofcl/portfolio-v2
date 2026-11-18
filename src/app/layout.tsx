@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -170,6 +171,7 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${bebasNeue.variable} font-sans bg-[#0a0a0a] text-white antialiased`}
       >
+        <SmoothScroll />
         <script
           type="application/ld+json"
           id="schema-markup"

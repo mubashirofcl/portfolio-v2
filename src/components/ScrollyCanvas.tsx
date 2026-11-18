@@ -9,9 +9,18 @@ interface ScrollyCanvasProps {
 
 export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const imagesRef = useRef<(HTMLImageElement | null)[]>([]);
   const lastDrawnFrameRef = useRef<number>(-1);
   const rafIdRef = useRef<number | null>(null);
+  const layoutRef = useRef({
+    offsetX: 0,
+    offsetY: 0,
+    drawWidth: 0,
+    drawHeight: 0,
+    canvasWidth: 0,
+    canvasHeight: 0,
+  });
   const totalFrames = 120;
 
   // Use the shared heroRef for scroll target
@@ -20,23 +29,21 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     offset: ["start start", "end end"],
   });
 
-  // Physics-based spring smoothing for liquid-smooth canvas scrubbing
+  // Responsive spring synchronized with Lenis inertia for fluid, lag-free scrubbing
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
+    stiffness: 180,
     damping: 28,
+    mass: 0.2,
     restDelta: 0.0001,
   });
 
   const pad = (num: number) => String(num).padStart(3, "0");
 
-  // Helper to draw a specific frame on canvas with object-fit: cover logic
+  // Fast draw using cached context and precomputed cover dimensions
   const drawFrame = (index: number) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = ctxRef.current;
     if (!ctx) return;
 
-    // Get image or closest loaded fallback to prevent any black/empty frames
     let img = imagesRef.current[index];
     if (!img || !img.complete) {
       for (let offset = 1; offset < totalFrames; offset++) {
@@ -54,46 +61,37 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
       if (!img || !img.complete) return;
     }
 
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
+    const { offsetX, offsetY, drawWidth, drawHeight, canvasWidth, canvasHeight } = layoutRef.current;
     if (!canvasWidth || !canvasHeight) return;
-
-    const imgWidth = img.naturalWidth || img.width;
-    const imgHeight = img.naturalHeight || img.height;
-    if (!imgWidth || !imgHeight) return;
-
-    const imgRatio = imgWidth / imgHeight;
-    const canvasRatio = canvasWidth / canvasHeight;
-
-    let drawWidth = canvasWidth;
-    let drawHeight = canvasHeight;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    if (canvasRatio > imgRatio) {
-      drawHeight = canvasWidth / imgRatio;
-      offsetY = (canvasHeight - drawHeight) / 2;
-    } else {
-      drawWidth = canvasHeight * imgRatio;
-      offsetX = (canvasWidth - drawWidth) / 2;
-    }
 
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   };
 
-  // Preload frames with immediate priority on the first 10 frames
+  // Preload frames with background decode to eliminate main-thread decoding jank
   useEffect(() => {
     let active = true;
     const loadedImages: (HTMLImageElement | null)[] = new Array(totalFrames).fill(null);
 
-    const handleImageLoad = (index: number) => {
+    const handleImageLoad = (img: HTMLImageElement, index: number) => {
       if (!active) return;
-      const currentProgress = smoothProgress.get();
-      const currentFrame = Math.max(0, Math.min(totalFrames - 1, Math.round(currentProgress * (totalFrames - 1))));
-      if (index === currentFrame || lastDrawnFrameRef.current === -1) {
-        lastDrawnFrameRef.current = index;
-        drawFrame(index);
+      if (img.decode) {
+        img.decode().catch(() => {}).then(() => {
+          if (!active) return;
+          const currentProgress = smoothProgress.get();
+          const currentFrame = Math.max(0, Math.min(totalFrames - 1, Math.round(currentProgress * (totalFrames - 1))));
+          if (index === currentFrame || lastDrawnFrameRef.current === -1) {
+            lastDrawnFrameRef.current = index;
+            drawFrame(index);
+          }
+        });
+      } else {
+        const currentProgress = smoothProgress.get();
+        const currentFrame = Math.max(0, Math.min(totalFrames - 1, Math.round(currentProgress * (totalFrames - 1))));
+        if (index === currentFrame || lastDrawnFrameRef.current === -1) {
+          lastDrawnFrameRef.current = index;
+          drawFrame(index);
+        }
       }
     };
 
@@ -102,7 +100,7 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     frameZero.src = `/sequence/frame_${pad(0)}_delay-0.066s.webp`;
     frameZero.onload = () => {
       loadedImages[0] = frameZero;
-      handleImageLoad(0);
+      handleImageLoad(frameZero, 0);
     };
     loadedImages[0] = frameZero;
 
@@ -110,7 +108,7 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     for (let i = 1; i < totalFrames; i++) {
       const img = new Image();
       img.src = `/sequence/frame_${pad(i)}_delay-0.066s.webp`;
-      img.onload = () => handleImageLoad(i);
+      img.onload = () => handleImageLoad(img, i);
       loadedImages[i] = img;
     }
 
@@ -121,16 +119,49 @@ export default function ScrollyCanvas({ heroRef }: ScrollyCanvasProps) {
     };
   }, [smoothProgress]);
 
-  // Set up resize handler and initial canvas rendering
+  // Set up resize handler, caching context and cover layout geometry
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    ctxRef.current = canvas.getContext("2d", { alpha: true });
+
     const handleResize = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2 to preserve GPU performance
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
+      // Cap DPR to 1.5 to match 1080p source sequence resolution and save >50% GPU fill rate
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const canvasWidth = Math.round(rect.width * dpr);
+      const canvasHeight = Math.round(rect.height * dpr);
+
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      const imgWidth = 1920;
+      const imgHeight = 1080;
+      const imgRatio = imgWidth / imgHeight;
+      const canvasRatio = canvasWidth / canvasHeight;
+
+      let drawWidth = canvasWidth;
+      let drawHeight = canvasHeight;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      if (canvasRatio > imgRatio) {
+        drawHeight = canvasWidth / imgRatio;
+        offsetY = (canvasHeight - drawHeight) / 2;
+      } else {
+        drawWidth = canvasHeight * imgRatio;
+        offsetX = (canvasWidth - drawWidth) / 2;
+      }
+
+      layoutRef.current = {
+        offsetX,
+        offsetY,
+        drawWidth,
+        drawHeight,
+        canvasWidth,
+        canvasHeight,
+      };
 
       const currentProgress = smoothProgress.get();
       const frameIndex = Math.max(0, Math.min(totalFrames - 1, Math.round(currentProgress * (totalFrames - 1))));

@@ -261,7 +261,7 @@ export default function Projects() {
                     alt={activeProject.title}
                     width={900}
                     height={506}
-                    className="object-cover w-full h-full"
+                    className="object-contain w-full h-full"
                     priority
                   />
                 </div>

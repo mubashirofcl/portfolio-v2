@@ -16,10 +16,11 @@ export default function Overlay({ heroRef }: OverlayProps) {
     offset: ["start start", "end end"],
   });
 
-  // Physics-based spring smoothing for overlay transitions
+  // Physics-based spring smoothing synchronized with ScrollyCanvas
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
+    stiffness: 180,
+    damping: 28,
+    mass: 0.2,
     restDelta: 0.0001,
   });
 

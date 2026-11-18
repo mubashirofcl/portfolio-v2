@@ -104,13 +104,13 @@ function edLoadCurve(seed: number, loadS: number): (t: number) => number {
 /** Real document load, 0..1. Images and fonts pull it up; the window load event finishes it. */
 function edRealLoad(): number {
     if (typeof document === "undefined") return 1
-    if (document.readyState === "complete") return 1
+    if (document.readyState === "complete" || document.readyState === "interactive") return 1
     const imgs = document.images
     let done = 0
     for (let i = 0; i < imgs.length; i++) if (imgs[i].complete) done++
     const frac = imgs.length ? done / imgs.length : 1
     const fonts = document.fonts && document.fonts.status === "loaded" ? 1 : 0
-    return Math.min(0.95, 0.15 + 0.6 * frac + 0.2 * fonts)
+    return Math.min(1.0, 0.2 + 0.6 * frac + 0.2 * fonts)
 }
 
 const edClamp = (x: number): number => (x < 0 ? 0 : x > 1 ? 1 : x)
@@ -222,7 +222,7 @@ function useEditorialLoader(
                 // The real load only ever holds the simulated curve back, never pushes it on.
                 const target = onCanvas ? curve(t) : Math.min(curve(t), edRealLoad())
                 progress = target >= 1 ? 1 : Math.min(target, progress + dt * 1.5)
-                if (progress >= 1 && t >= loadS) revealAt = t
+                if ((progress >= 1 || t >= loadS + 1.2) && t >= loadS) revealAt = t
             }
             draw(dt)
             if (revealAt >= 0 && t - revealAt >= revealS) {

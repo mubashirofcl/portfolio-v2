@@ -393,6 +393,7 @@ export default function GrainyCarousel(props: GrainyCarouselProps) {
     const gl = canvas.getContext("webgl", {
       alpha: true,
       premultipliedAlpha: false,
+      preserveDrawingBuffer: true,
     });
 
     let prog: WebGLProgram | null = null;

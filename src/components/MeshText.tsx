@@ -479,6 +479,10 @@ function __OriginkitBase_MeshText(props: any) {
             }
             cursor.x = x
             cursor.y = y
+            if (!animating && !cancelled) {
+                animating = true
+                rafId = requestAnimationFrame(tick)
+            }
         }
         const onLeave = () => {
             cursor.inside = false
@@ -491,8 +495,11 @@ function __OriginkitBase_MeshText(props: any) {
         document.documentElement.addEventListener("pointerleave", onLeave)
 
         // ── Animation loop ──────────────────────────────────────────────
+        let animating = true
         let rafId = 0
         const tick = () => {
+            if (cancelled) return
+
             cursor.vx = cursor.x - cursor.px
             cursor.vy = cursor.y - cursor.py
             const vmag = Math.hypot(cursor.vx, cursor.vy)
@@ -502,6 +509,8 @@ function __OriginkitBase_MeshText(props: any) {
             }
             cursor.px = cursor.x
             cursor.py = cursor.y
+
+            let maxMotion = Math.hypot(cursor.vx, cursor.vy)
 
             // Drag only — mesh vertices pulled along the cursor's motion.
             for (let i = 0; i < vertCount; i++) {
@@ -540,6 +549,9 @@ function __OriginkitBase_MeshText(props: any) {
                 else if (ndy < -1) ndy = -1
                 disp[i2] = ndx
                 disp[i2 + 1] = ndy
+
+                const m = Math.abs(ndx) + Math.abs(ndy) + Math.abs(vx) + Math.abs(vy)
+                if (m > maxMotion) maxMotion = m
             }
 
             gl.bindBuffer(gl.ARRAY_BUFFER, dispBuf)
@@ -578,6 +590,12 @@ function __OriginkitBase_MeshText(props: any) {
 
             gl.bindVertexArray(vao)
             gl.drawElements(gl.TRIANGLES, indexCount, gl.UNSIGNED_INT, 0)
+
+            // Idle sleep: if cursor is inactive/away and mesh vertices have fully settled, pause loop
+            if (!cursor.inside && maxMotion < 0.0001) {
+                animating = false
+                return
+            }
 
             rafId = requestAnimationFrame(tick)
         }
